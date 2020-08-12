@@ -13,4 +13,6 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js/app.js')
     .js('resources/js/logout.js', 'public/js/logout.js')
-    .sass('resources/sass/app.scss', 'public/css/app.css');
+    .js('resources/js/scroll.js', 'public/js/scroll.js')
+    .sass('resources/sass/app.scss', 'public/css/app.css')
+    .sass('resources/sass/home.scss', 'public/css/home.css');
