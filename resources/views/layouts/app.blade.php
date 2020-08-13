@@ -20,11 +20,13 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito&family=Anton"" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ mix('css/home.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/products.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/cart.css') }}" rel="stylesheet">
     
 </head>
 <body>
@@ -39,10 +41,6 @@
 
         @yield('scroll')
     </div>
-
-    <footer>
-        <p>Project 1 &copy; Sun Asterisk</p>
-    </footer>
 
     <script src="{{ mix('js/logout.js') }}"></script>
     <script src="{{ mix('js/scroll.js') }}"></script>

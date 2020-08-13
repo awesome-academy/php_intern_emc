@@ -12,10 +12,10 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto menu-home__center">
                 <li class="nav-item">
-                    <a class="nav-link" href="">{{ trans('home.home') }}</a>
+                    <a class="nav-link" href="{{ route('home') }}">{{ trans('home.home') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">{{ trans('home.products') }}</a>
+                    <a class="nav-link" href="{{ route('products.index') }}">{{ trans('home.products') }}</a>
 
                     <div class="sub-menu-home">
                         <div class="container">
@@ -43,7 +43,7 @@
 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">{{ trans('home.products_viewed') }}</a>
+                    <a class="nav-link" href="{{ route('products.viewed') }}">{{ trans('home.products_viewed') }}</a>
                 </li>
             </ul>
 
@@ -51,7 +51,7 @@
             <ul class="navbar-nav ml-3">
 
                 <div class="cart-item">
-                    <a href="">
+                    <a href="{{ route('cart.index') }}">
                         <i class="fas fa-cart-plus"></i>
 
                         <div class="cart-number">

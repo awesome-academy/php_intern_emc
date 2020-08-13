@@ -1,0 +1,142 @@
+$second_color : #ffc120;
+
+.banner {
+    padding-top: 110px;
+    padding-bottom: 110px;
+
+    text-align: center;
+    background-image: url('//cdn.shopify.com/s/files/1/0014/4880/4425/files/6_1920x.jpg?v=1532496563');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
+    &__title {
+        text-transform: uppercase;
+        font-family: 'Anton', sans-serif;
+        color: #fff;
+        font-size: 35px;
+        letter-spacing: 2px;
+    }
+
+    .breadcrumb  {
+        background: none;
+        justify-content: center;
+        padding-top: 5px;
+
+        a {
+            text-decoration: none !important;
+            color: #fff;
+        }
+
+        &-item {
+            font-size: 16px !important;
+
+            &.active {
+                color: $second_color;
+            }
+        }
+    }
+}
+
+
+.producs-page__contai {
+    padding-top: 1.5rem;
+}
+
+
+// Side bar
+.side-bar {
+    margin-bottom: 15px;
+
+    &__title {
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+
+        margin-bottom: 10px;
+
+        &:after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 1.5px;
+            margin-top: 2px;
+            background-color: #e1e1e1;
+        }
+    }
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+
+        padding: 5px 0;
+        
+        a {
+            font-size: 15px;
+            text-decoration: none;
+            color: #333;
+            transition: linear .2s;
+
+            &:hover {
+                color: $second_color;
+            }
+        }
+    }
+}
+
+
+// Fillter product
+.products-filter {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 15px;
+
+    .sort-by {
+        label {
+            margin-right: 10px;
+            font-size: 15.5px;
+        }
+        &__select {
+            padding: 8px 5px;
+            border: 1px solid #e4e4e4;
+        }
+    }
+}
+
+
+.product {
+    margin-bottom: 15px;
+}
+
+@media screen and (max-width: 600px) {
+    .banner {
+        padding-top: 50px;
+        padding-bottom: 50px;
+
+        &__title {
+            font-size: 30px;
+        }
+
+        .breadcrumb  {
+            padding-top: 0;
+    
+            &-item {
+                font-size: 14px !important;
+            }
+        }
+    }
+
+    .side-bar {
+        &__title {
+            font-size: 18.5px;
+        }
+
+        &:last-child {
+            margin-bottom: 22px;
+        }
+    }
+
+    .producs-page__contai {
+        padding-top: 0;
+    }
+}

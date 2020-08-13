@@ -15,4 +15,6 @@ mix.js('resources/js/app.js', 'public/js/app.js')
     .js('resources/js/logout.js', 'public/js/logout.js')
     .js('resources/js/scroll.js', 'public/js/scroll.js')
     .sass('resources/sass/app.scss', 'public/css/app.css')
-    .sass('resources/sass/home.scss', 'public/css/home.css');
+    .sass('resources/sass/home.scss', 'public/css/home.css')
+    .sass('resources/sass/products.scss', 'public/css/products.css')
+    .sass('resources/sass/cart.scss', 'public/css/cart.css');
