@@ -5,6 +5,9 @@
  */
 
 require('./bootstrap');
+require('./admin/jquery.dataTables');
+require('./admin/sb-admin-2');
+require('./admin/datatables-demo');
 
 window.Vue = require('vue');
 
