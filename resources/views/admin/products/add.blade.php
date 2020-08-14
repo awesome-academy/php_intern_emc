@@ -10,6 +10,26 @@
             </div>
 
             <div class="modal-body" id="attachment-body-content">
+                <form id="edit-form" class="form-horizontal" method="POST" action={{route('products.import')}} enctype="multipart/form-data">
+                    {{csrf_field()}}
+                    <div class="card text-white bg-gradient-info mb-0">
+                        <div class="card-header bg-gradient-info">
+                            <h2 class="m-0">{{trans('admin.import.title')}}</h2>
+                        </div>
+                        <div class="card-body">
+                            <!-- name -->
+                            <div class="form-group">
+                                <label class="col-form-label" for="modal-input-name">{{trans('admin.import.name')}}</label>
+                                <input type="file" name="excel_file" class="form-control" id="excel_file"
+                                       required autofocus>
+                            </div>
+                            <input class="btn btn-success" type="submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-body" id="attachment-body-content">
                 <form id="edit-form" class="form-horizontal" method="POST"
                       action={{route('products.store')}} enctype="multipart/form-data">
                     {{csrf_field()}}

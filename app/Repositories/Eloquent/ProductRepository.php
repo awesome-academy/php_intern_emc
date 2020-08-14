@@ -38,7 +38,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
     public function getProducts()
     {
-        $products = $this->model->with('category')->paginate('setting.product.paginate');
+        $products = $this->model->with('category')->paginate(Config::get('setting.product.pagination'));
         return $products;
     }
 
@@ -101,5 +101,17 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             return $result;
         }
         return $result;
+    }
+
+    public function importProducts($data)
+    {
+        $extension = $data->getClientOriginalExtension();
+        if ($extension == 'csv'){
+
+            Excel::import(new ImportProducts(), $data);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

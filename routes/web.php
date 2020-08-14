@@ -27,5 +27,6 @@ Route::put('/account', 'AccountController@updatePass')->name('account.updatePass
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/', 'AdminController@index')->name('admin.index');
+    Route::post('/', 'ProductController@importProduct')->name('products.import');
     Route::resource('products', 'ProductController');
 });
