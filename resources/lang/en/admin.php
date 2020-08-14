@@ -31,5 +31,45 @@ return [
         'earning' => 'Earnings (Monthly)',
         'deliver' => 'Success Deliver',
         'request_product' => 'Pending Requests',
+    ],
+    'notify' => [
+        'product' => [
+            'create' => [
+                'success' => 'This product has been created.',
+                'fail' => 'Import list product failed',
+                'import_success' => 'Import list product success',
+                'import_fail' => 'Import list product failed',
+            ],
+            'update' => [
+                'success' => 'Your product was updated successfully',
+                'fail' => 'Your product was not updated successfully',
+            ],
+            'delete' => [
+                'success' => 'This product was deleted.',
+            ],
+            'find' => [
+                'fail' => 'Cannot find this product',
+            ],
+        ]
+    ],
+    'table' => [
+      'product' => [
+          'action' => 'Action',
+          'add_title' => 'Add Product',
+          'edit_title' => 'Edit Product',
+      ]
+    ],
+    'product' => [
+        'add_title' => 'ADD PRODUCT',
+        'name' => 'Name',
+        'description' => 'Description',
+        'information' => 'Information',
+        'amount' => 'Amount',
+        'price' => 'Price',
+        'discount' => 'Discount',
+        'category' => 'Category',
+        'image' => 'Image',
+        'btn_close' => 'Close',
+        'title' => 'Product Management',
     ]
 ];

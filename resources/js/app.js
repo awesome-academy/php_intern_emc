@@ -8,6 +8,7 @@ require('./bootstrap');
 require('./admin/jquery.dataTables');
 require('./admin/sb-admin-2');
 require('./admin/datatables-demo');
+require('./admin/product');
 
 window.Vue = require('vue');
 

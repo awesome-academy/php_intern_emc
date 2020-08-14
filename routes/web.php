@@ -20,3 +20,8 @@ Route::get('/products/viewed', 'ProductController@viewed')->name('products.viewe
 Route::resource('/products', 'ProductController');
 
 Route::resource('/cart', 'CartController')->except(['create', 'show', 'edit']);
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::get('/', 'AdminController@index')->name('admin.index');
+    Route::resource('products', 'ProductController');
+});
