@@ -15,3 +15,8 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 
+Route::get('/products/viewed', 'ProductController@viewed')->name('products.viewed');
+
+Route::resource('/products', 'ProductController');
+
+Route::resource('/cart', 'CartController')->except(['create', 'show', 'edit']);
