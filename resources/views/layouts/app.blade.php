@@ -27,7 +27,7 @@
     <link href="{{ mix('css/home.css') }}" rel="stylesheet">
     <link href="{{ mix('css/products.css') }}" rel="stylesheet">
     <link href="{{ mix('css/cart.css') }}" rel="stylesheet">
-    
+    <link href="{{ mix('css/account.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">

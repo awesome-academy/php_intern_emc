@@ -21,6 +21,10 @@ Route::resource('/products', 'ProductController');
 
 Route::resource('/cart', 'CartController')->except(['create', 'show', 'edit']);
 
+Route::resource('/account', 'AccountController')->only(['index', 'update']);
+
+Route::put('/account', 'AccountController@updatePass')->name('account.updatePass');
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/', 'AdminController@index')->name('admin.index');
     Route::resource('products', 'ProductController');

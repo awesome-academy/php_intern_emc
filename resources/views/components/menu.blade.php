@@ -79,7 +79,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="">
+                            <a class="dropdown-item" href="{{ route('account.index') }}">
                                 {{ trans('auth.account') }}
                             </a>
                             <a class="dropdown-item" id="btn_logout" href="">

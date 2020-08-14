@@ -17,4 +17,5 @@ mix.js('resources/js/app.js', 'public/js/app.js')
     .sass('resources/sass/app.scss', 'public/css/app.css')
     .sass('resources/sass/home.scss', 'public/css/home.css')
     .sass('resources/sass/products.scss', 'public/css/products.css')
-    .sass('resources/sass/cart.scss', 'public/css/cart.css');
+    .sass('resources/sass/cart.scss', 'public/css/cart.css')
+    .sass('resources/sass/account.scss', 'public/css/account.css');
