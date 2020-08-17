@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use App\Repositories\Interfaces\UserRepositoryInterface;
 
 class RegisterController extends Controller
 {
@@ -33,19 +34,22 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    protected $user;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserRepositoryInterface $user)
     {
         $this->middleware('guest');
+        $this->user = $user;
     }
 
     protected function register(RegisterRequest $request)
     {
-        User::create([
+        $data = [
             'username' => $request->username,
             'full_name' => $request->full_name,
             'email' => $request->email,
@@ -54,7 +58,10 @@ class RegisterController extends Controller
             'phone_number' => $request->phone_number,
             'gender' => $request->gender,
             'password' => Hash::make($request->password),
-        ]);
+            'role' => 0,
+        ];
+
+        $this->user->create($data);
 
         if (Auth::attempt($request->only('username', 'password'))) {
             return redirect($this->redirectTo);

@@ -1,0 +1,79 @@
+$second_color : #ffc120;
+
+.account {
+    &__box {
+        min-height: 200px;
+        padding: 25px 20px;
+        border-radius: 5px;
+
+        background-color: #fff;
+    }
+
+    &-info {
+        display: flex;
+        margin-bottom: 20px;
+
+        &__img {
+            border-radius: 50%;
+            border: 1.5px solid $second_color;
+        }
+
+        &__box {
+            padding-left: 10px;
+
+            & span {
+                font-size: 15px;
+            }
+        }
+
+        &__name {
+            font-size: 18px;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    }
+
+    .nav-pills {
+        margin-bottom: 25px;
+
+        .nav-link {
+            color: #000;
+            font-size: 15px;
+            &.active {
+                background-color: rgb(235, 235, 235);
+            }
+        }
+    }
+
+    .history-order {
+        thead th {
+            vertical-align: bottom;
+            border-bottom: 1px solid #dee2e6;
+            border-top: 0;
+        }
+
+        td {
+            border-top: 0;
+        }
+
+        .image_order {
+            width: 50px;
+            height: 55px;
+        }
+    }
+}
+
+// custom
+@media (min-width: 768px) {
+    .col-md-25 {
+        flex: 0 0 25%;
+        max-width: 20%;
+    }
+
+    .offset-md-25 {
+        margin-left: 20%;
+    }
+}
