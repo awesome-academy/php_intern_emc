@@ -19,66 +19,80 @@
             
             <div class="side-bar">
                 <h3 class="side-bar__title">{{ trans('home.categories') }}</h3>
-                <!-- Khi có data sẽ được thay thế bằng các category item -->
-                <div class="side-bar__box">
-                    <div class="side-bar__item">
-                        <a href="">Sách giáo khóa</a>
-                        <span>(10)</span>
+                @foreach ($categories as $category)
+                    <div class="side-bar__box">
+                        <div class="side-bar__item">
+                            <a href="">{{ $category->name }}</a>
+                            @if (count($category->children))
+                                <i class="fas fa-chevron-right"></i>
+                            @endif
+                        </div>
+                        @if (count($category->children))
+                            <div class="side-bar__item-sub">
+                                @foreach ($category->children as $childCategory)
+                                    <a href="" class="item-sub">{{ $childCategory->name }}</a>
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
-                    <div class="side-bar__item">
-                        <a href="">Sách kinh tế</a>
-                        <span>(10)</span>
-                    </div>
-                    <div class="side-bar__item">
-                        <a href="">Sách chính trị</a>
-                        <span>(10)</span>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
 
         <div class="col-12 col-md-9">
             <div class="products-filter">
                 <div class="sort-by">
-                    <form action="" method="GET">
+                    <form action="{{ url('products') }}" method="GET" id="formSortProducts">
                         <label for="">{{ trans('home.order_by') }}</label>
-                        <select class="sort-by__select">
-                            <option value="">{{ trans('home.alphabet_a_z') }}</option>
-                            <option value="">{{ trans('home.alphabet_z_a') }}</option>
-                            <option value="">{{ trans('home.price_low_hight') }}</option>
-                            <option value="">{{ trans('home.price_hight_low') }}</option>
-                            <option value="">{{ trans('home.date_new_old') }}</option>
-                            <option value="">{{ trans('home.date_old_new') }}</option>
-                            <option value="">{{ trans('home.sale') }}</option>
+                        <select name="order-by" class="sort-by__select" id="sortProducts">
+                            <option value=""></option>
+                            <option value="a-z">{{ trans('home.alphabet_a_z') }}</option>
+                            <option value="z-a">{{ trans('home.alphabet_z_a') }}</option>
+                            <option value="price_low_hight">{{ trans('home.price_low_hight') }}</option>
+                            <option value="price_hight_low">{{ trans('home.price_hight_low') }}</option>
+                            <option value="date_new_old">{{ trans('home.date_new_old') }}</option>
+                            <option value="date_old_new">{{ trans('home.date_old_new') }}</option>
+                            <option value="sale">{{ trans('home.sale') }}</option>
                         </select>
                     </form>
                 </div>
             </div>
 
             <div class="row box-products">
-                <!-- Thực hiện thêm mẫu 1 sản phẩm vào -->
-                <div class="col-6 col-md-4 product">
-                    <div class="product__box">
-                        <a href="{{ route('products.show', ['id' => 1]) }}" class="product__image">
-                            <img class="image" src="https://salt.tikicdn.com/cache/280x280/ts/product/df/7d/da/cc713d2bcecd12ba82d5596ddbcac2d7.jpg" alt="">
-                        </a>
-                        <a href="" class="product__content">
-                            <p class="product__name" title="999 Lá Thư Gửi Cho Chính Mình – Mong Bạn Trở Thành Phiên Bản Hoàn Hảo Nhất">
-                                999 Lá Thư Gửi Cho Chính. Mong Bạn Trở Thành Phiên Bản Hoàn Hảo Nhất
-                            </p>
-                            <div class="product__price">
-                                <!-- <span class="final-price">270.000 đ</span> -->
-                                <div class="discount-price">
-                                    <span class="final-price">270.000 đ</span>
-                                    <span class="discount-percent">-10%</span>
-                                    <p class="old-price">300.000 đ</p>
+                @foreach ($products as $product)
+                    <div class="col-6 col-md-3 product">
+                        <div class="product__box">
+                            <a href="{{ route('products.show', ['id' => $product->id]) }}" class="product__image">
+                                <img class="image" src="{{ asset('image/products') }}/{{ $product->image }}" alt="">
+                            </a>
+                            <a href="{{ route('products.show', ['id' => $product->id]) }}" class="product__content">
+                                <p class="product__name" title="{{ $product->name }}">
+                                    {{ $product->name }}
+                                </p>
+                                <div class="product__price">
+                                    @if ($product->discount)
+                                        <div class="discount-price">
+                                            <span class="final-price">
+                                                {{ number_format(price_discount($product->price, $product->discount)) }} đ
+                                            </span>
+                                            <span class="discount-percent">-{{ $product->discount }}%</span>
+                                            <p class="old-price">{{ number_format($product->price) }} đ</p>
+                                        </div>
+                                    @else
+                                        <span class="final-price">{{ number_format($product->price) }} đ</span>
+                                    @endif
                                 </div>
-                            </div>
-                        </a>
-                        <i class="fas fa-shopping-cart btnAddCart" title="{{ trans('home.add_to_cart') }}"></i>
+                            </a>
+                            <i data-id="{{ $product->id }}" class="fas fa-shopping-cart btnAddCart" 
+                                title="{{ trans('home.add_to_cart') }}"></i>
+                        </div>
                     </div>
-                </div>
+                @endforeach
+                
             </div>
+
+            {{ $products->appends(request()->query())->links() }}
+
         </div>
 
     </div>

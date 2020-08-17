@@ -3,9 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\Interfaces\ProductRepositoryInterface;
+use App\Repositories\Interfaces\CategoryRepositoryInterface;
 
 class ProductController extends Controller
 {
+    private $productRepository;
+    private $categoryRepository;
+
+    public function __construct(
+        ProductRepositoryInterface $productRepository,
+        CategoryRepositoryInterface $categoryRepository
+    )
+    {
+        $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -13,13 +27,17 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('products.products');
+        $products = $this->productRepository->getProducts();
+        $categories = $this->categoryRepository->getRootCategory();
+
+        return view('products.products', compact(['products', 'categories']));
     }
 
 
     public function viewed()
     {
-        return view('products.productsViewed');
+        $viewedProducts = $this->productRepository->getManyProducts([1, 2, 3, 4, 7, 9]); //dữ liệu test
+        return view('products.productsViewed', compact('viewedProducts'));
     }
 
 

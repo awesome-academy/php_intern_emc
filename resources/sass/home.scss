@@ -216,6 +216,12 @@ $second_color : #ffc120;
         width: 100%;
         position: relative;
         background-color: #fff;
+
+        &:hover .btnAddCart{
+            opacity: 1;
+            transform: translateY(-20px);
+            visibility: visible;
+        }
     }
 
     &__image {
@@ -224,6 +230,7 @@ $second_color : #ffc120;
     }
 
     &__content {
+        min-height: 130px;
         padding: 10px 10px;
         display: block;
         text-decoration: none !important;
@@ -265,10 +272,13 @@ $second_color : #ffc120;
 
     .btnAddCart {
         position: absolute;
-        bottom: 15px;
+        bottom: 0;
         right: 18px;
         font-size: 17.5px;
         cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
     }
 
     @media screen and (max-width: 600px) {
@@ -281,6 +291,30 @@ $second_color : #ffc120;
     }
 }
 
+// custom sweetalert
+.swal2-show {
+    padding: 10px;
+}
+
+.swal2-styled.swal2-confirm {
+    margin-left: auto;
+    font-size: 14px;
+    background-color: #000;
+    border-radius: 15px;
+}
+
+.swal2-styled:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+.swal2-title {
+    font-size: 21px;
+}
+
+.swal2-content {
+    font-size: 18px;
+}
 
 footer {
     background-color: #fff;

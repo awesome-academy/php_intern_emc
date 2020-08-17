@@ -18,6 +18,12 @@
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
 
+     <!-- Link Sweetalert2 -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito&family=Anton"" rel="stylesheet">
@@ -44,6 +50,8 @@
 
     <script src="{{ mix('js/logout.js') }}"></script>
     <script src="{{ mix('js/scroll.js') }}"></script>
+    <script src="{{ mix('js/orderByProducts.js') }}" ></script>
+    <script src="{{ mix('js/cart.js') }}" ></script>
 
 </body>
 </html>
