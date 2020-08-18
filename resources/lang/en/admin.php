@@ -71,5 +71,9 @@ return [
         'image' => 'Image',
         'btn_close' => 'Close',
         'title' => 'Product Management',
-    ]
+    ],
+    'import' => [
+        'title' => 'Import Product',
+        'name' => 'Name',
+    ],
 ];
