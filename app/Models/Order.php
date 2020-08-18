@@ -13,6 +13,7 @@ class Order extends Model
         'user_id',
         'total_price',
         'full_name',
+        'email',
         'address',
         'phone_number',
         'status',
@@ -55,5 +56,10 @@ class Order extends Model
         } else {
             return $this->user->phone_number;
         }
+    }
+    
+    public function productOrders()
+    {
+        return $this->hasMany(ProductOrder::class);
     }
 }

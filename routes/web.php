@@ -25,6 +25,10 @@ Route::resource('/account', 'AccountController')->only(['index', 'update']);
 
 Route::put('/account', 'AccountController@updatePass')->name('account.updatePass');
 
+Route::get('/order', 'OrderController@index')->name('order.index');
+
+Route::post('/order', 'OrderController@guestOrder')->name('order.guestOrder');
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/', 'AdminController@index')->name('admin.index');
     Route::post('/', 'ProductController@importProduct')->name('products.import');

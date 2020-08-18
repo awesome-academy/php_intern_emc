@@ -9,6 +9,8 @@
                         <h2 class="cart__title">{{ trans('home.shop_cart') }}</h2>
                     </div>
 
+                    @include('common.cartMessage')
+
                     <form action="" method="POST">
                         @csrf
                         @foreach($sessionCart as $key => $cart)
@@ -70,7 +72,7 @@
                         </div>
 
                         <div class="checkout text-center card-block">
-                            <a href="" class="btn__buy">{{ trans('home.payment') }}</a>
+                            <a href="{{ route('order.index') }}" class="btn__buy">{{ trans('home.payment') }}</a>
                         </div>
 
                     </div>

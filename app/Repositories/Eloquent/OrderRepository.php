@@ -5,6 +5,7 @@ namespace App\Repositories\Eloquent;
 use App\Models\Order;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
 use Mockery\Exception;
+use DB;
 
 class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 {
@@ -36,5 +37,55 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
             $result = false;
         }
         return $result;
+    }
+
+    public function userOrderProducts($user_id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $order = Order::create([
+                'user_id' => $user_id,
+                'total_price' => total_cart(),
+                'status' => config('enums.status.pending'),
+            ]);
+    
+            foreach (session('cart') as $key => $product) {
+                $order->productOrders()->create([
+                    'product_id' => $key,
+                    'quantity' => $product['quantity'],
+                    'price' => $product['price'],
+                ]);
+            }
+
+            DB::commit();
+            return 'Order successfully';
+        } catch (\Exception $e) {
+            DB::rollback();
+            return 'Order error';
+        }
+    }
+
+    public function guestOrderProducts($data)
+    {
+        DB::beginTransaction();
+
+        try {
+            $order = Order::create($data);
+    
+            foreach (session('cart') as $key => $product) {
+                $order->productOrders()->create([
+                    'product_id' => $key,
+                    'quantity' => $product['quantity'],
+                    'price' => $product['price'],
+                ]);
+            }
+
+            DB::commit();
+            return 'Order successfully';
+        } catch (\Exception $e) {
+            DB::rollback();
+            return 'Order error';
+        }
     }
 }
