@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\View;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\Eloquent\UserRepository;
 
+
+use App\Repositories\Interfaces\CategoryRepositoryInterface;
+use App\Repositories\Eloquent\CategoryRepository;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -22,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
     }
 
     /**

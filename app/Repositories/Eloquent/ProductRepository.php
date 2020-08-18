@@ -17,6 +17,25 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         return Product::class;
     }
 
+    public function getProductsOrderbyHome($field, $sort)
+    {
+        $products = $this->model->with('category')->orderBy($field, $sort)->paginate(Config::get('setting.product.paginationHome'));
+        return $products;
+    }
+
+    public function getProductsOrderby($field, $sort)
+    {
+        $products = $this->model->with('category')->orderBy($field, $sort)->paginate(Config::get('setting.product.pagination'));
+        return $products;
+    }
+
+    public function getManyProducts($data)
+    {
+        $products = $this->model->findMany($data);
+
+        return $products;
+    }
+
     public function getProducts()
     {
         $products = $this->model->with('category')->paginate('setting.product.paginate');
