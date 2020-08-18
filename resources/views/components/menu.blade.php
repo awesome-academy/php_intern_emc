@@ -55,8 +55,8 @@
                         <i class="fas fa-cart-plus"></i>
 
                         <div class="cart-number">
-                            <div class="d-flex justify-content-center align-items-center">
-                                0
+                            <div class="d-flex justify-content-center align-items-center cart-number__item">
+                                {{ count(session('cart', [])) }}
                             </div>
                         </div>
                     </a>

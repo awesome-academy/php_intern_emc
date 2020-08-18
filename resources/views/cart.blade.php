@@ -14,16 +14,16 @@
                         @foreach($sessionCart as $key => $cart)
                             <div class="cart__product">
                                 <div class="cart__product-img">
-                                    <img class="image" src="{{$cart['image']}}" alt="">
+                                    <img class="image" src="{{ asset('image/products') }}/{{ $cart['image'] }}" alt="">
                                 </div>
                                 <div class="cart__product-name">
                                     <a href="" class="name_product">{{$cart['name']}}</a>
                                     <p class="price-product">{{number_format($cart['price'])}} đ</p>
                                 </div>
                                 <div class="cart__product-icon">
-                                    <input type="number" name="quantity[{{$key}}]" value={{$cart['quantity']}}> 
+                                    <input type="number" min="1" class="input_quantity" name="{{ $key }}" value={{ $cart['quantity'] }}> 
                                     <p class="total-price">{{number_format($cart['price'] * $cart['quantity'])}} đ</p>
-                                    <a href="" class="cart__delete">
+                                    <a data-id="{{ $key }}" href="" class="cart__delete">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </div>
@@ -34,10 +34,6 @@
 
                     @if(count($sessionCart) == 0)
                         <p class="alert_nothing">{{ trans('home.empty_cart') }}</p>
-                    @else
-                        <div>
-                            <a href="" class="update-cart">{{ trans('home.update_cart') }}</a>
-                        </div>
                     @endif
                     
                     <a href="{{ route('products.index') }}" class="btn__buy btn__buy-margin">{{ trans('home.continue_buy') }}</a>
@@ -52,7 +48,7 @@
                                     <span class="label js-subtotal">
                                         {{count($sessionCart)}} {{ trans('home.products') }}
                                     </span>
-                                    <span class="value">0 đ</span>
+                                    <span class="value total_cart">{{ number_format(total_cart()) }} đ</span>
                                 </div>
                                 <div class="cart-summary-line" id="cart-subtotal-shipping">
                                     <span class="label">
@@ -67,7 +63,7 @@
                             <div class="card-block">
                                 <div class="cart-summary-line cart-total">
                                     <span class="label">{{ trans('home.total_money') }}</span>
-                                    <span class="value">100.000 đ</span>
+                                    <span class="value total_cart">{{ number_format(total_cart()) }} đ</span>
                                 </div>
                             </div>
                             <hr class="separator">
