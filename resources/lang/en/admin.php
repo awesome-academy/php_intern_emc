@@ -33,12 +33,24 @@ return [
         'request_product' => 'Pending Requests',
     ],
     'notify' => [
+        'order' => [
+            'update' => [
+                'success' => 'Your order was updated successfully',
+                'fail' => 'Your order was not updated successfully',
+            ],
+            'delete' => [
+                'success' => 'This order was deleted.',
+                'fail' => 'This order was deleted fail.',
+            ],
+        ],
         'product' => [
             'create' => [
                 'success' => 'This product has been created.',
                 'fail' => 'Import list product failed',
                 'import_success' => 'Import list product success',
                 'import_fail' => 'Import list product failed',
+                'request_success' => 'Request product success',
+                'request_false' => 'Request product failed',
             ],
             'update' => [
                 'success' => 'Your product was updated successfully',
@@ -53,11 +65,11 @@ return [
         ]
     ],
     'table' => [
-      'product' => [
-          'action' => 'Action',
-          'add_title' => 'Add Product',
-          'edit_title' => 'Edit Product',
-      ]
+        'product' => [
+            'action' => 'Action',
+            'add_title' => 'Add Product',
+            'edit_title' => 'Edit Product',
+        ]
     ],
     'product' => [
         'add_title' => 'ADD PRODUCT',
@@ -72,8 +84,32 @@ return [
         'btn_close' => 'Close',
         'title' => 'Product Management',
     ],
-    'import' => [
-        'title' => 'Import Product',
-        'name' => 'Name',
+    'product_request' => [
+        'username' => 'Full Name',
+        'product' => 'Product Name',
+        'description' => 'Description',
+        'image' => 'Image',
+        'action' => 'Action',
+        'status' => 'Status',
     ],
+    'enum' => [
+        'request_status' => [
+            0 => 'Pending',
+            1 => 'Success',
+            2 => 'Cancel',
+        ],
+    ],
+    'status_request' => [
+        'pending' => 'Pending',
+        'success' => 'Success',
+        'cancel' => 'Cancel',
+    ],
+    'order' => [
+        'total_price' => 'Total',
+        'full_name' => 'Full Name',
+        'address' => 'Address',
+        'phone_number' => 'Phone Number',
+        'status' => 'Status',
+        'action' => 'Action',
+    ]
 ];

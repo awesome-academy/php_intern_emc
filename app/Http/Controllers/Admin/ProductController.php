@@ -123,7 +123,7 @@ class ProductController extends Controller
 
     public function importProduct(Request $request)
     {
-        if ($this->productRepository->importProducts($request->file('excel_file'))){
+        if ($this->productRepository->importProducts($request->file('excel_file'))) {
             return redirect()->route('products.index')->with([
                 'message' => trans('admin.notify.product.create.import_success'),
                 'color' => 'success',
