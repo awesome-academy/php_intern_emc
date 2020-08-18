@@ -44,4 +44,10 @@ return [
     'name_product' => 'Name product',
     'close' => 'Close',
     'update_img_account' => 'Update account\'s avatar',
+    'cart_success' => 'Add to cart successfully',
+    'not_exist_cart' => 'Product not exist in cart',
+    'product_not_found' => 'Product not found',
+    'error' => 'Error',
+    'not_enough' => 'The product is not enough',
+    'out_of_stock' => 'The product is out of stock',
 ];

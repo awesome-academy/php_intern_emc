@@ -133,7 +133,7 @@ a {
 
 .btn__buy {
     padding: 10px 22px;
-    border-radius: 5px;
+    border-radius: 20px;
     border: none;
 
     background-color: $primary-color;
@@ -165,6 +165,7 @@ a {
 
 .cart-summary, #js-checkout-summary {
     border: 1px solid #ebebeb;
+    border-radius: 7px;
 
     .card-block {
         padding: 15px;
