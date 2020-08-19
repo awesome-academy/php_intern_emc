@@ -50,4 +50,10 @@ return [
     'error' => 'Error',
     'not_enough' => 'The product is not enough',
     'out_of_stock' => 'The product is out of stock',
+    'success_order' => 'Order successfully',
+    'error_order' => 'Something errors when order, please try again',
+    'bill_info' => 'Billing Information',
+    'subtotal' => 'Subtotal',
+    'already_account' => 'Already have an account?',
+    'order_emply_cart' => 'Cart is empty, please buy products to order', 
 ];

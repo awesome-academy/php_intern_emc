@@ -108,7 +108,7 @@ $(document).ready(() => {
                     });
                     $(this).val(quantity - 1);
                 } else {
-                    $(this).parent().find('.total-price').html(res.totalThisProduct +' đ');
+                    $(this).parent().parent().find('.total-price').html(res.totalThisProduct +' đ');
                     $('.total_cart').html(res.totalCart +' đ');
                 }
             },
