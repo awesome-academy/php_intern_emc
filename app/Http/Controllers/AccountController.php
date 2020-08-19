@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\UserRepositoryInterface;
+use App\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Http\Requests\UpdateInfoRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Models\User;
@@ -12,17 +13,23 @@ use Illuminate\Support\Facades\Hash;
 class AccountController extends Controller
 {
     protected $user;
+    protected $orderRepository;
 
-    public function __construct(UserRepositoryInterface $user)
+    public function __construct(
+        UserRepositoryInterface $user,
+        OrderRepositoryInterface $orderRepository
+    )
     {
         $this->middleware('auth');
         $this->user = $user;
+        $this->orderRepository = $orderRepository;
     }
 
     public function index(Request $request)
     {
         $user = $request->user();
-        return view('account', compact('user'));
+        $orders = $this->orderRepository->getOrdersOfUser($user->id);
+        return view('account', compact(['user', 'orders']));
     }
 
     public function update(UpdateInfoRequest $request, User $user)

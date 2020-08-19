@@ -9,7 +9,7 @@ use DB;
 
 class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 {
-
+    
     public function getModel()
     {
         return Order::class;
@@ -18,6 +18,11 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
     public function getOrders()
     {
         return $this->model->with('user')->get();
+    }
+
+    public function getOrdersOfUser($user_id)
+    {
+        return $this->model->where('user_id', $user_id)->get();
     }
 
     public function viewOrder($id)

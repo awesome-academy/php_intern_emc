@@ -1,3 +1,3 @@
 <header class="header">
-    <img class="image" src="{{ asset('images/banner2.jpg') }}" alt="">
+    <img class="image" src="{{ asset('image/banner2.jpg') }}" alt="">
 </header>

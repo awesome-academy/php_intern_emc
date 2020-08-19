@@ -29,6 +29,8 @@ Route::get('/order', 'OrderController@index')->name('order.index');
 
 Route::post('/order', 'OrderController@guestOrder')->name('order.guestOrder');
 
+Route::get('/order/{id}', 'OrderControllers@show');
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/', 'AdminController@index')->name('admin.index');
     Route::post('/', 'ProductController@importProduct')->name('products.import');

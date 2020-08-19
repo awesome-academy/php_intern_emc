@@ -9,4 +9,5 @@ interface OrderRepositoryInterface
     public function deleteOrder($id);
     public function userOrderProducts($user_id);
     public function guestOrderProducts(array $data);
+    public function getOrdersOfUser($user_id);
 }

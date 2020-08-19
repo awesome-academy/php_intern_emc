@@ -68,4 +68,10 @@ class OrderController extends Controller
             return redirect()->route('order.index')->with('errorOrder', trans('home.error_order'));
         }
     }
+
+    public function show($id)
+    {
+        $productsOrder = $this->orderRepository->viewOrder($id);
+        return view('components.detailOrder', compact('productsOrder'));
+    }
 }
