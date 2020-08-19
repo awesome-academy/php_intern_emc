@@ -29,5 +29,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/', 'AdminController@index')->name('admin.index');
     Route::post('/', 'ProductController@importProduct')->name('products.import');
     Route::resource('products', 'ProductController');
+    Route::resource('requestproducts', 'RequestProductController')->except(['create', 'edit']);
     Route::resource('orders', 'OrderController')->except(['create', 'store']);
 });
+Route::post('createproducts', 'Admin\RequestProductController@createProductFromRequest')->name('request.create_product');
