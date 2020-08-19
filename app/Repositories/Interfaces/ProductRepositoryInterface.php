@@ -11,4 +11,6 @@ interface ProductRepositoryInterface
     public function getProductsOrderbyHome($field, $sort);
     public function getProductsOrderby($field, $sort);
     public function getManyProducts(array $data);
+    public function filterProduct($request);
+    public function showProductShop();
 }

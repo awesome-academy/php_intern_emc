@@ -111,5 +111,13 @@ return [
         'phone_number' => 'Phone Number',
         'status' => 'Status',
         'action' => 'Action',
+    ],
+    'filter' => [
+        'price_title' => 'Filter by Price',
+        'category_title' => 'Filter by Category',
+        'decrease_price' => 'Giá tăng dần',
+        'increase_price' => 'Giá giảm dần',
+        'search' => 'Search',
+        'all' => 'Tất cả',
     ]
 ];

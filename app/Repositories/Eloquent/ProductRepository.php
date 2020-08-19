@@ -29,7 +29,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         return $products;
     }
 
-    public function getManyProducts($data)
+    public function getManyProducts(array $data)
     {
         $products = $this->model->findMany($data);
 
@@ -113,5 +113,23 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         } else {
             return false;
         }
+    }
+
+    public function filterProduct($request)
+    {
+        $products = $this->model->query()
+            ->name($request)
+            ->category($request)
+            ->price($request)
+            ->sortPrice($request)
+            ->discount($request)
+            ->paginate('setting.product.pagination_shop');
+        return $products;
+    }
+
+    public function showProductShop()
+    {
+        $products = $this->model->paginate(Config::get('setting.product.pagination_shop'));
+        return $products;
     }
 }

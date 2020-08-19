@@ -19,3 +19,5 @@ yarn-error.log
 .idea/phpunit.xml
 .idea/vcs.xml
 .idea/workspace.xml
+/public/css
+/public/js
