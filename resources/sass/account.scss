@@ -77,3 +77,9 @@ $second_color : #ffc120;
         margin-left: 20%;
     }
 }
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 600px;
+    }
+}

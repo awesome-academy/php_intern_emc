@@ -52,6 +52,7 @@
     <script src="{{ mix('js/scroll.js') }}"></script>
     <script src="{{ mix('js/orderByProducts.js') }}" ></script>
     <script src="{{ mix('js/cart.js') }}" ></script>
+    <script src="{{ mix('js/detailOrder.js') }}" ></script>
 
 </body>
 </html>

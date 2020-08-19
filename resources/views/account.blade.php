@@ -227,22 +227,24 @@
                                     <tr>
                                         <th>{{ trans('home.order_no') }}</th>
                                         <th>{{ trans('home.order_date') }}</th>
-                                        <th>{{ trans('home.quantity') }}</th>
                                         <th>{{ trans('home.total') }}</th>
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <thead>
-                                    <tr>
-                                        <td>120</td>
-                                        <td>2020-08-13</td>
-                                        <td>3</td>
-                                        <td>200 $</td>
-                                        <td>
-                                            <a href="" data-toggle="modal" data-target="#viewDetail">{{ trans('home.view_detail') }}</a>
-                                        </td>
-                                    </tr>
-                                </thead>
+                                <tbody>
+                                    @foreach ($orders as $order)
+                                        <tr>
+                                            <td>{{ $order->id }}</td>
+                                            <td>{{ $order->created_at }}</td>
+                                            <td>{{ number_format($order->total_price) }} đ</td>
+                                            <td>
+                                                <a href="" data-id="{{ $order->id }}" class="detail_order" data-toggle="modal" data-target="#viewDetail">
+                                                    {{ trans('home.view_detail') }}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
 
@@ -266,17 +268,8 @@
                                                 <th>{{ trans('home.total') }}</th>
                                             </tr>
                                         </thead>
-                                        <thead>
-                                            <tr>
-                                                <td>
-                                                    <img src="https://salt.tikicdn.com/cache/280x280/ts/product/eb/62/6b/0e56b45bddc01b57277484865818ab9b.jpg" alt="" 
-                                                        class="image_order">
-                                                </td>
-                                                <td>Dac nhan tam</td>
-                                                <td>3</td>
-                                                <td>200 $</td>
-                                            </tr>
-                                        </thead>
+                                        <tbody id="content_detail">
+                                        </tbody>
                                     </table>
 
                                 </div>
