@@ -7,6 +7,9 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Http\Requests\OrderRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderMail;
+use Mockery\Exception;
 
 class OrderController extends Controller
 {
@@ -19,7 +22,7 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        if (count(session('cart')) == 0) {
+        if (count(session('cart', [])) == 0) {
             return redirect()->route('cart.index')->with('errorOrder', trans('home.order_emply_cart'));
         }
 
@@ -37,8 +40,14 @@ class OrderController extends Controller
         $result = $this->orderRepository->userOrderProducts($user_id);
 
         if ($result === 'Order successfully') {
+            $sendMail = $this->sendMail($request->user()->email);
             session()->forget('cart');
-            return redirect()->route('cart.index')->with('successOrder', trans('home.success_order'));
+
+            if ($sendMail === 'Send mail success') {
+                return redirect()->route('cart.index')->with('successOrder', trans('home.success_order'));
+            } else {
+                return redirect()->route('cart.index')->with('errorOrder', trans('home.mail.error_mail'));
+            }
         } else {
             return redirect()->route('cart.index')->with('errorOrder', trans('home.error_order'));
         }
@@ -46,7 +55,7 @@ class OrderController extends Controller
 
     public function guestOrder(OrderRequest $request)
     {
-        if (count(session('cart')) == 0) {
+        if (count(session('cart', [])) == 0) {
             return redirect()->route('order.index')->with('errorOrder', trans('home.order_emply_cart'));
         }
 
@@ -62,8 +71,14 @@ class OrderController extends Controller
         $result = $this->orderRepository->guestOrderProducts($data);
 
         if ($result === 'Order successfully') {
+            $sendMail = $this->sendMail($request->email);
             session()->forget('cart');
-            return redirect()->route('cart.index')->with('successOrder', trans('home.success_order'));
+
+            if ($sendMail === 'Send mail success') {
+                return redirect()->route('cart.index')->with('successOrder', trans('home.success_order'));
+            } else {
+                return redirect()->route('cart.index')->with('errorOrder', trans('home.mail.error_mail'));
+            }
         } else {
             return redirect()->route('order.index')->with('errorOrder', trans('home.error_order'));
         }
@@ -73,5 +88,21 @@ class OrderController extends Controller
     {
         $productsOrder = $this->orderRepository->viewOrder($id);
         return view('components.detailOrder', compact('productsOrder'));
+    }
+
+    public function sendMail($email)
+    {
+        try {
+            $content = [
+                'products' => session('cart'),
+                'total' => total_cart(),
+            ];
+
+            Mail::to($email)->send(new OrderMail($content));
+
+            return 'Send mail success';
+        } catch(\Exception $e) {
+            return 'Send mail error';
+        }
     }
 }
