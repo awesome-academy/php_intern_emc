@@ -17,4 +17,21 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         $categories = $this->model->where('parent_id', null)->get();
         return $categories;
     }
+
+    public function updateCategory($id, $data)
+    {
+        $result = 'Update failed';
+        try {
+            $category = $this->model->find($id);
+
+            $category->name = $data['name'];
+            $category->parent_id = $data['parent_id'];
+            $category->save();
+            
+            $result = 'Update successfully';
+        } catch (Exception $exception) {
+            return $result;
+        }
+        return $result;
+    }
 }

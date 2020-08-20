@@ -62,14 +62,35 @@ return [
             'find' => [
                 'fail' => 'Cannot find this product',
             ],
-        ]
+        ],
+        'category' => [
+            'create' => [
+                'success' => 'This category has been created.',
+                'fail' => 'Add new category failed',
+            ],
+            'update' => [
+                'success' => 'Your category was updated successfully',
+                'fail' => 'Your category was not updated successfully',
+            ],
+            'delete' => [
+                'success' => 'This category was deleted.',
+            ],
+            'find' => [
+                'fail' => 'Cannot find this category',
+            ],
+        ],
     ],
     'table' => [
         'product' => [
             'action' => 'Action',
             'add_title' => 'Add Product',
             'edit_title' => 'Edit Product',
-        ]
+        ],
+        'category' => [
+            'action' => 'Action',
+            'add_title' => 'Add Category',
+            'edit_title' => 'Edit Category',
+        ],
     ],
     'product' => [
         'add_title' => 'ADD PRODUCT',
@@ -119,5 +140,13 @@ return [
         'increase_price' => 'Giá giảm dần',
         'search' => 'Search',
         'all' => 'Tất cả',
-    ]
+    ],
+    'category' => [
+        'add_title' => 'ADD CATEGORY',
+        'title' => 'Categories Management',
+        'category_parent' => 'Category Parent',
+        'name' => 'Name',
+        'parent' => 'Parent',
+        'action' => 'Action'
+    ],
 ];
