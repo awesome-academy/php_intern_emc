@@ -42,3 +42,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 Route::post('createproducts', 'Admin\RequestProductController@createProductFromRequest')->name('request.create_product');
 Route::get('filter/products', 'ShopController@filterProduct')->name('product.filter');
 Route::get('shop', 'ShopController@index');
+Route::post('products/{id}/reviews', 'ProductController@reviewProduct')->name('products.review');
+Route::get('comments/{id}', 'ProductController@getComments')->name('comments.index');

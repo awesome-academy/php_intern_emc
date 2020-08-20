@@ -46,6 +46,19 @@ $(document).ready(function () {
         $('#image').val(image);
         $('#img_request').attr('src', image_src);
     })
+
+    $(document).on('click', '.pagination_comment .pagination a', function (event) {
+        event.preventDefault();
+        var pageNum = $(this).attr('href').split('page=')[1];
+        var product_id = $('#product_id').val();
+        $.ajax({
+            url: '/comments/' + product_id + '?page=' + pageNum,
+            method: "GET",
+            success: function (data) {
+                $('#all_comments').html(data);
+            }
+        })
+    });
 });
 
 function fetchProductOrders(order_id) {
