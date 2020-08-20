@@ -22,4 +22,7 @@ return [
         '20,50' => 'Discount 20% đến 50%',
         '50,100' => 'Discount 50% đến 100%',
     ],
+    'pagination' => [
+        'comments' => 7,
+    ]
 ];

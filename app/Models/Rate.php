@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rate extends Model
 {
+    protected $table = 'ratings';
+
     protected $fillable = [
         'user_id',
         'product_id',
