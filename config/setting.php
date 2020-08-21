@@ -24,5 +24,6 @@ return [
     ],
     'pagination' => [
         'comments' => 7,
-    ]
+    ],
+    'default_avatar' => 'http://bootdey.com/img/Content/avatar/avatar1.png',
 ];

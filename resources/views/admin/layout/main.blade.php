@@ -14,3 +14,4 @@
 </div>
 <script src="{{ mix('js/app.js') }}"></script>
 <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.js') }}"></script>
+<script src="{{ mix('js/detailOrder.js') }}"></script>

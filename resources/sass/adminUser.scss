@@ -1,0 +1,11 @@
+#content_detail {
+    img {
+        width: 100px;
+    }
+} 
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 650px !important;
+    }
+}
