@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Notifications\RequestProductStatus;
 use App\Repositories\Interfaces\RequestProductRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -43,6 +44,7 @@ class RequestProductController extends Controller
     {
         $request_product = $this->requestProductRepository->find($id);
         if ($request_product->update($request->all())) {
+            $request_product->user->notify(new RequestProductStatus($request_product));
             return response()->json($request_product->status);
         }
     }

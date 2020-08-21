@@ -47,3 +47,5 @@ Route::get('filter/products', 'ShopController@filterProduct')->name('product.fil
 Route::get('shop', 'ShopController@index');
 Route::post('products/{id}/reviews', 'ProductController@reviewProduct')->name('products.review');
 Route::get('comments/{id}', 'ProductController@getComments')->name('comments.index');
+Route::get('/markallnotifications', 'System\NotificationController@markAllRead')->name('noti.mark_all');
+Route::delete('/deletenotifications', 'System\NotificationController@deleteAllNotificationByUser')->name('noti.delete_all');
