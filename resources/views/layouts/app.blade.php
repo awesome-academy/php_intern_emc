@@ -18,15 +18,16 @@
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
 
-     <!-- Link Sweetalert2 -->
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
+    <!-- Link Sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
     <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito&family=Anton"" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito&family=Anton"
+    " rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
@@ -36,23 +37,23 @@
     <link href="{{ mix('css/account.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        @include('components.menu')
+<div id="app">
+    @include('components.menu')
 
-        @yield('header')
+    @yield('header')
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+    <main class="py-4">
+        @yield('content')
+    </main>
 
-        @yield('scroll')
-    </div>
+    @yield('scroll')
+</div>
 
-    <script src="{{ mix('js/logout.js') }}"></script>
-    <script src="{{ mix('js/scroll.js') }}"></script>
-    <script src="{{ mix('js/orderByProducts.js') }}" ></script>
-    <script src="{{ mix('js/cart.js') }}" ></script>
-    <script src="{{ mix('js/detailOrder.js') }}" ></script>
-
+<script src="{{ mix('js/logout.js') }}"></script>
+<script src="{{ mix('js/scroll.js') }}"></script>
+<script src="{{ mix('js/orderByProducts.js') }}"></script>
+<script src="{{ mix('js/cart.js') }}"></script>
+<script src="{{ mix('js/detailOrder.js') }}"></script>
+<script src="{{mix('js/subiz_chat')}}"></script>
 </body>
 </html>
