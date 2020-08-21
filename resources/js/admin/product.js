@@ -19,6 +19,11 @@ $(document).ready(function () {
         deleteItem('categories/', id);
     })
 
+    $('.remove-user').click(function () {
+        var id = $(this).val();
+        deleteItem('users/', id);
+    })
+
     $('.view-order').click(function () {
         $('#show_order').modal('show');
         var order_id = $(this).val();

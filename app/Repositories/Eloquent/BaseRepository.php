@@ -81,7 +81,7 @@ abstract class BaseRepository implements RepositoryInterface
         $fillable = $this->model->getFillable();
         $data = array_only($attributes, $fillable);
         foreach ($data as $key => $value) {
-            if (empty($value)) {
+            if (!isset($value)) {
                 unset($data[$key]);
             }
         }

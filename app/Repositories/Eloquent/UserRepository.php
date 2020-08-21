@@ -23,4 +23,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             return "The old password is not correct";
         }
     }
+
+    public function getAllUsers()
+    {
+        $users = $this->model->where('role', 0)->get();
+
+        return $users;
+    }
 }

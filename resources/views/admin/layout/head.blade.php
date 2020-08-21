@@ -13,3 +13,4 @@
     rel="stylesheet">
 <!-- Custom styles FOR this template-->
 <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ mix('css/adminUser.css') }}" rel="stylesheet" type="text/css">

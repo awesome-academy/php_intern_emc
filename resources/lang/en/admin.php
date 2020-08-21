@@ -79,6 +79,22 @@ return [
                 'fail' => 'Cannot find this category',
             ],
         ],
+        'user' => [
+            'create' => [
+                'success' => 'This user has been created.',
+                'fail' => 'Add user failed',
+            ],
+            'update' => [
+                'success' => 'User was updated successfully',
+                'fail' => 'User was not updated successfully',
+            ],
+            'delete' => [
+                'success' => 'This user was deleted.',
+            ],
+            'find' => [
+                'fail' => 'Cannot find this user',
+            ],
+        ],  
     ],
     'table' => [
         'product' => [
@@ -90,6 +106,11 @@ return [
             'action' => 'Action',
             'add_title' => 'Add Category',
             'edit_title' => 'Edit Category',
+        ],
+        'user' => [
+            'action' => 'Action',
+            'add_title' => 'Add User',
+            'edit_title' => 'Edit User',
         ],
     ],
     'product' => [
@@ -162,5 +183,30 @@ return [
         'name' => 'Name',
         'parent' => 'Parent',
         'action' => 'Action'
+    ],
+    'user' => [
+        'name' => 'Name',
+        'btn_close' => 'Close',
+        'title' => 'User Management',
+        'email' => 'Email',
+        'birthday' => 'Birthday',
+        'address' => 'Address',
+        'phone_number' => 'Phone Number',
+        'user_name' => 'User Name',
+        'full_name' => 'Full Name',
+        'gender' => 'Gender',
+        'male' => 'Male',
+        'female' => 'Female',
+        'password' => 'Password',
+        'confirm_pass' => 'Confirm Password',
+        'order_no' => 'Order No.',
+        'order_date' => 'Order date',
+        'quantity' => 'Quantity',
+        'total' => 'Total',
+        'view_detail' => 'View detail',
+        'img' => 'Image',
+        'title_order' => 'Detail user\'s order',
+        'name_product' => 'Name product',
+        'close' => 'Close',
     ],
 ];
