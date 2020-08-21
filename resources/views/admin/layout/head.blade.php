@@ -14,3 +14,4 @@
 <!-- Custom styles FOR this template-->
 <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ mix('css/adminUser.css') }}" rel="stylesheet" type="text/css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>

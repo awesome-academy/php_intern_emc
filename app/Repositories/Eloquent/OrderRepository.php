@@ -93,4 +93,23 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
             return 'Order error';
         }
     }
+
+    public function statistical()
+    {
+        $data = [];
+
+        $chart = DB::table('orders')
+            ->select(DB::raw('month(created_at) as month'), DB::raw('sum(total_price) as TotalAmount '))   
+            ->where(DB::raw('year(created_at)'), config('setting.year'))
+            ->where('status', config('enums.status.accepted'))
+            ->groupBy(DB::raw('month(created_at)'))
+            ->get();
+        
+        // lặp dữ liệu vừa query để gán vào data
+        foreach ($chart as $item) {
+            $data[$item->month - 1] = $item->TotalAmount;
+        }
+        
+        return $data;
+    }
 }

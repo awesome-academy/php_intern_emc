@@ -33,6 +33,7 @@ Route::get('/order/{id}', 'OrderController@show');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/', 'AdminController@index')->name('admin.index');
+    Route::get('/statistical', 'AdminController@getStatistical');
     Route::post('/', 'ProductController@importProduct')->name('products.import');
     Route::resource('products', 'ProductController');
     Route::resource('requestproducts', 'RequestProductController')->except(['create', 'edit']);

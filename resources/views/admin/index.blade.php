@@ -97,4 +97,7 @@
             </div>
         </div>
 
+        <div class="my-3">
+            <canvas id="myChart"></canvas>
+        </div>
 @endsection

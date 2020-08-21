@@ -11,6 +11,7 @@ require('./admin/datatables-demo');
 require('./admin/product');
 require('./filter_product');
 require('./share_facebook');
+require('./admin/chart');
 
 window.Vue = require('vue');
 
