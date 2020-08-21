@@ -69,6 +69,36 @@ $(document).ready(function () {
             }
         })
     });
+
+    $('.js-btn-mark-all').click(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            'url': '/markallnotifications',
+            'method': 'GET',
+            success: function (data) {
+                $('.notification_count').text('0');
+            }
+        });
+    })
+
+    $('.js-btn-delete-noty').click(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            'url': '/deletenotifications',
+            'method': 'DELETE',
+            success: function (data) {
+                $('#all_notifications').html('<div></div>');
+            }
+        });
+    })
 });
 
 function fetchProductOrders(order_id) {

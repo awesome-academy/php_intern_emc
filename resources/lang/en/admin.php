@@ -62,6 +62,10 @@ return [
             'find' => [
                 'fail' => 'Cannot find this product',
             ],
+            'content' => 'ebook has been',
+            'delete_all' => 'Delete all notification',
+            'title' => 'Your Request Product',
+            'mark_all' => 'Mark alas read',
         ],
         'category' => [
             'create' => [
@@ -94,7 +98,7 @@ return [
             'find' => [
                 'fail' => 'Cannot find this user',
             ],
-        ],  
+        ],
     ],
     'table' => [
         'product' => [
