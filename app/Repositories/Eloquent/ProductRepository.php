@@ -123,7 +123,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             ->price($request)
             ->sortPrice($request)
             ->discount($request)
-            ->paginate('setting.product.pagination_shop');
+            ->paginate(Config::get('setting.product.pagination_shop'));
         return $products;
     }
 

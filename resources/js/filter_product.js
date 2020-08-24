@@ -66,7 +66,7 @@ $(document).ready(function () {
                 '&page=' + page,
             method: 'GET',
             success: function (data) {
-                $('.product_show').hide().html(data).fadeIn(1500);
+                $('.product_show').hide().html(data).fadeIn(1000);
             }
         })
     }

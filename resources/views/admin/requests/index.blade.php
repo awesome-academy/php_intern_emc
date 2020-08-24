@@ -46,9 +46,9 @@
                                         <i class="fa fa-edit"></i>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <button value="{{$productRequest->id}}" class="dropdown-item success_btn" >{{trans('admin.status_request.pending')}}</button>
-                                        <button value="{{$productRequest->id}}" class="dropdown-item pending_btn" >{{trans('admin.status_request.Success')}}</button>
-                                        <button value="{{$productRequest->id}}" class="dropdown-item cancel_btn"  >{{trans('admin.status_request.Cancel')}}</button>
+                                        <button value="{{$productRequest->id}}" class="dropdown-item success_btn" >{{trans('admin.status_request.success')}}</button>
+                                        <button value="{{$productRequest->id}}" class="dropdown-item pending_btn" >{{trans('admin.status_request.pending')}}</button>
+                                        <button value="{{$productRequest->id}}" class="dropdown-item cancel_btn"  >{{trans('admin.status_request.cancel')}}</button>
                                     </div>
                                 </div>
                             </td>

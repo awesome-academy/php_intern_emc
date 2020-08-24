@@ -69,7 +69,6 @@ class RequestProductRepository extends BaseRepository implements RequestProductR
                 $fileName = uniqid() . '_' . $file->getClientOriginalName();
                 $file->move($path, $fileName);
             }
-
             $requestProduct = $this->model->create([
                 'product_name' => $data['name'],
                 'user_id' => $user_id,
@@ -82,6 +81,12 @@ class RequestProductRepository extends BaseRepository implements RequestProductR
             return $result;
         }
         return $result;
+    }
+
+    public function requestProductCount()
+    {
+        $requestCount = $this->model->where('status',0)->count();
+            return $requestCount;
     }
 
 }

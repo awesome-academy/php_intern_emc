@@ -26,9 +26,9 @@
                     <tbody>
                     @foreach($orders as $order)
                         <tr>
-                            <td>{{$order->FullName}}</td>
-                            <td>{{$order->Address}}</td>
-                            <td>{{$order->PhoneNumber}}</td>
+                            <td>{{($order->full_name) ? $order->full_name : $order->user->full_name}}</td>
+                            <td>{{($order->address) ? $order->address : $order->user->address}}</td>
+                            <td>{{($order->phone_number) ? $order->phone_number : $order->user->phone_number}}</td>
                             <td>{{$order->total_price}}</td>
                             <td><span class="badge badge-pill {{$order->status['color']}}">
                                      {{$order->status['status']}}
