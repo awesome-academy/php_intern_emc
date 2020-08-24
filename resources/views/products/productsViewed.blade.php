@@ -18,10 +18,10 @@
         @foreach ($viewedProducts as $product)
             <div class="col-6 col-md-3 product">
                 <div class="product__box">
-                    <a href="{{ route('products.show', ['id' => $product->id]) }}" class="product__image">
+                    <a href="{{ route('products.show_detail', ['id' => $product->id]) }}" class="product__image">
                         <img class="image" src="{{ asset('image/products') }}/{{ $product->image }}" alt="">
                     </a>
-                    <a href="{{ route('products.show', ['id' => $product->id]) }}" class="product__content">
+                    <a href="{{ route('products.show_detail', ['id' => $product->id]) }}" class="product__content">
                         <p class="product__name" title="{{ $product->name }}">
                             {{ $product->name }}
                         </p>
@@ -39,13 +39,13 @@
                             @endif
                         </div>
                     </a>
-                    <i data-id="{{ $product->id }}" class="fas fa-shopping-cart btnAddCart" 
+                    <i data-id="{{ $product->id }}" class="fas fa-shopping-cart btnAddCart"
                         title="{{ trans('home.add_to_cart') }}"></i>
                 </div>
             </div>
         @endforeach
     </div>
-    
+
 </div>
 @endsection
 

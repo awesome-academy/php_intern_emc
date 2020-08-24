@@ -11,4 +11,6 @@ interface RequestProductRepositoryInterface
     public function storeRequestProduct($user_id, $data);
 
     public function getAllRequests();
+
+    public function requestProductCount();
 }

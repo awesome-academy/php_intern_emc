@@ -9,14 +9,14 @@
     <section class="section-products">
         <h2 class="title-intro">{{ trans('home.new_book') }}</h2>
 
-        <div class="row box-products">
+        <div class="row box-products mb-5">
             @foreach ($newProducts as $product)
                 <div class="col-6 col-md-3 product">
                     <div class="product__box">
-                        <a href="{{ route('products.show', ['id' => $product->id]) }}" class="product__image">
+                        <a href="{{ route('products.show_detail', ['id' => $product->id]) }}" class="product__image">
                             <img class="image" src="{{ asset('image/products') }}/{{ $product->image }}" alt="">
                         </a>
-                        <a href="{{ route('products.show', ['id' => $product->id]) }}" class="product__content">
+                        <a href="{{ route('products.show_detail', ['id' => $product->id]) }}" class="product__content">
                             <p class="product__name" title="{{ $product->name }}">
                                 {{ $product->name }}
                             </p>
@@ -34,7 +34,7 @@
                                 @endif
                             </div>
                         </a>
-                        <i data-id="{{ $product->id }}" class="fas fa-shopping-cart btnAddCart" 
+                        <i data-id="{{ $product->id }}" class="fas fa-shopping-cart btnAddCart"
                             title="{{ trans('home.add_to_cart') }}"></i>
                     </div>
                 </div>
@@ -50,10 +50,10 @@
             @foreach ($saleProducts as $product)
                 <div class="col-6 col-md-3 product">
                     <div class="product__box">
-                        <a href="{{ route('products.show', ['id' => $product->id]) }}" class="product__image">
+                        <a href="{{ route('products.show_detail', ['id' => $product->id]) }}" class="product__image">
                             <img class="image" src="{{ asset('image/products') }}/{{ $product->image }}" alt="">
                         </a>
-                        <a href="{{ route('products.show', ['id' => $product->id]) }}" class="product__content">
+                        <a href="{{ route('products.show_detail', ['id' => $product->id]) }}" class="product__content">
                             <p class="product__name" title="{{ $product->name }}">
                                 {{ $product->name }}
                             </p>
@@ -71,7 +71,7 @@
                                 @endif
                             </div>
                         </a>
-                        <i data-id="{{ $product->id }}" class="fas fa-shopping-cart btnAddCart" 
+                        <i data-id="{{ $product->id }}" class="fas fa-shopping-cart btnAddCart"
                             title="{{ trans('home.add_to_cart') }}"></i>
                     </div>
                 </div>
@@ -86,10 +86,10 @@
             @foreach ($trendProducts as $product)
                 <div class="col-6 col-md-3 product">
                     <div class="product__box">
-                        <a href="{{ route('products.show', ['id' => $product->id]) }}" class="product__image">
+                        <a href="{{ route('products.show_detail', ['id' => $product->id]) }}" class="product__image">
                             <img class="image" src="{{ asset('image/products') }}/{{ $product->image }}" alt="">
                         </a>
-                        <a href="{{ route('products.show', ['id' => $product->id]) }}" class="product__content">
+                        <a href="{{ route('products.show_detail', ['id' => $product->id]) }}" class="product__content">
                             <p class="product__name" title="{{ $product->name }}">
                                 {{ $product->name }}
                             </p>
@@ -107,7 +107,7 @@
                                 @endif
                             </div>
                         </a>
-                        <i data-id="{{ $product->id }}" class="fas fa-shopping-cart btnAddCart" 
+                        <i data-id="{{ $product->id }}" class="fas fa-shopping-cart btnAddCart"
                             title="{{ trans('home.add_to_cart') }}"></i>
                     </div>
                 </div>
@@ -123,10 +123,10 @@
                 @foreach ($viewedProducts as $product)
                     <div class="col-6 col-md-3 product">
                         <div class="product__box">
-                            <a href="{{ route('products.show', ['id' => $product->id]) }}" class="product__image">
+                            <a href="{{ route('products.show_detail', ['id' => $product->id]) }}" class="product__image">
                                 <img class="image" src="{{ asset('image/products') }}/{{ $product->image }}" alt="">
                             </a>
-                            <a href="{{ route('products.show', ['id' => $product->id]) }}" class="product__content">
+                            <a href="{{ route('products.show_detail', ['id' => $product->id]) }}" class="product__content">
                                 <p class="product__name" title="{{ $product->name }}">
                                     {{ $product->name }}
                                 </p>
@@ -144,7 +144,7 @@
                                     @endif
                                 </div>
                             </a>
-                            <i data-id="{{ $product->id }}" class="fas fa-shopping-cart btnAddCart" 
+                            <i data-id="{{ $product->id }}" class="fas fa-shopping-cart btnAddCart"
                                 title="{{ trans('home.add_to_cart') }}"></i>
                         </div>
                     </div>

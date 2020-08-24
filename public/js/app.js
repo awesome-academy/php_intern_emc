@@ -49754,9 +49754,7 @@ $(document).ready(function () {
         }
       });
     },
-    error: function error(err) {
-      alert('Has error');
-    }
+    error: function error(err) {}
   });
 });
 
@@ -49771,7 +49769,9 @@ $(document).ready(function () {
 
 // Call the dataTables jQuery plugin
 $(document).ready(function () {
-  $('#dataTable').DataTable();
+  $('#dataTable').DataTable({
+    "pageLength": 5
+  });
 });
 
 /***/ }),
@@ -63921,23 +63921,23 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
-  $('.remove-product').click(function () {
+  $("#datatable tbody").on("click", ".remove-product", function () {
     var id = $(this).val();
     deleteItem('products/', id);
   });
-  $('.remove-request').click(function () {
+  $("#datatable tbody").on("click", ".remove-request", function () {
     var id = $(this).val();
     deleteItem('requestproducts/', id);
   });
-  $('.remove-order').click(function () {
+  $("#datatable tbody").on("click", ".remove-order", function () {
     var id = $(this).val();
     deleteItem('orders/', id);
   });
-  $('.remove-category').click(function () {
+  $("#datatable tbody").on("click", ".remove-category", function () {
     var id = $(this).val();
     deleteItem('categories/', id);
   });
-  $('.remove-user').click(function () {
+  $("#datatable tbody").on("click", ".remove-user", function () {
     var id = $(this).val();
     deleteItem('users/', id);
   });
@@ -63946,17 +63946,17 @@ $(document).ready(function () {
     var order_id = $(this).val();
     fetchProductOrders(order_id);
   });
-  $('.pending_btn').click(function () {
+  $("#datatable tbody").on("click", ".pending_btn", function () {
     var request_id = $(this).val();
     var status_text = $(this).parents('tr').find('td')[4].innerText;
     updateStatusRequest('requestproducts/', request_id, 0);
   });
-  $('.cancel_btn').click(function () {
+  $("#datatable tbody").on("click", ".cancel_btn", function () {
     var request_id = $(this).val();
     var status_text = $(this).parents('tr').find('td')[4].innerText;
     updateStatusRequest('requestproducts/', request_id, 2);
   });
-  $('.success_btn').click(function () {
+  $("#datatable tbody").on("click", ".success_btn", function () {
     var product_name = $(this).parents('tr').find('td')[1].innerText;
     var description = $(this).parents('tr').find('td')[2].innerText;
     var image_src = $(this).parents('tr').find('td').children('img').attr('src');
@@ -64007,6 +64007,49 @@ $(document).ready(function () {
       'method': 'DELETE',
       success: function success(data) {
         $('#all_notifications').html('<div></div>');
+      }
+    });
+  });
+  $('.js-btn-customer-request').click(function () {
+    $('#create_request_product').modal('show');
+  });
+  $('.js-btn-review').click(function () {
+    $('#show_review').modal('show');
+  });
+  $('.js-btn-add-review').click(function () {
+    var product_id = $(this).val();
+    var content = $('#content_comment').val();
+    var rating = $("input[name='rating_comment']:checked").val();
+    var user_name = $('#navbarDropdown').text().trim();
+    var data;
+
+    if (rating === undefined) {
+      data = {
+        'content': content
+      };
+    } else {
+      data = {
+        'content': content,
+        'rating': rating
+      };
+    }
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+      url: product_id + '/reviews',
+      method: 'POST',
+      data: data,
+      success: function success(data) {
+        var comment = '    <div class="reviews-members pt-4">\n' + '                    <div class="media">\n' + '                        <a href="#"><img alt="Generic placeholder image"\n' + '                                         src="http://bootdey.com/img/Content/avatar/avatar1.png"\n' + '                                         class="mr-3 rounded-pill"></a>\n' + '                        <div class="media-body">\n' + '                            <div class="reviews-members-header">\n' + '                                <h5 class="mb-1"><a class="text-black" href="#">' + user_name + '</a></h5>\n' + '                                <p class="text-gray">' + data.created_at + '</p>\n' + '                            </div>\n' + '                            <div class="reviews-members-body">\n' + '                                <p>' + data.content + '</p>\n' + '                            </div>\n' + '                        </div>\n' + '                    </div>\n' + '                </div>';
+        $('.all_comments').prepend(comment);
+        $('#show_review').modal('hide');
+      },
+      error: function error(data) {
+        console.log('ER', data);
       }
     });
   });
@@ -64164,8 +64207,6 @@ __webpack_require__(/*! ./admin/datatables-demo */ "./resources/js/admin/datatab
 
 __webpack_require__(/*! ./admin/product */ "./resources/js/admin/product.js");
 
-__webpack_require__(/*! ./filter_product */ "./resources/js/filter_product.js");
-
 __webpack_require__(/*! ./share_facebook */ "./resources/js/share_facebook.js");
 
 __webpack_require__(/*! ./admin/chart */ "./resources/js/admin/chart.js");
@@ -64308,80 +64349,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/filter_product.js":
-/*!****************************************!*\
-  !*** ./resources/js/filter_product.js ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-$(document).ready(function () {
-  var search_name = '';
-  var price = '';
-  var category = '';
-  var sort = '';
-  var discount = '';
-  var page = 1;
-
-  var delay = function () {
-    var timer = 0;
-    return function (callback, ms) {
-      clearTimeout(timer);
-      timer = setTimeout(callback, ms);
-    };
-  }();
-
-  $('#search_txt').keyup(function () {
-    delay(function () {
-      inputText = $('#search_txt').val().toLowerCase();
-      fetchProduct(category, inputText, price, sort, discount, page);
-      search_name = inputText;
-    }, 300);
-  });
-  $('input[type=radio][name=category_radio]').change(function () {
-    var category_id = $(this).val();
-    fetchProduct(category_id, search_name, price, sort, discount, page);
-    category = category_id;
-  });
-  $('input[type=radio][name=price_filter]').change(function () {
-    var price_filter = $(this).val();
-    fetchProduct(category, search_name, price_filter, sort, discount, page);
-    price = price_filter;
-  });
-  $('#sort_price').change(function () {
-    var sort_price = $(this).val();
-    fetchProduct(category, search_name, price, sort_price, discount, page);
-    sort = sort_price;
-  });
-  $('#filter_discount').change(function () {
-    var filter_discount = $(this).val();
-
-    if (filter_discount == '') {
-      fetchProduct('', '', '', '', '', 1);
-    } else {
-      fetchProduct(category, search_name, price, sort, filter_discount, page);
-      discount = filter_discount;
-    }
-  });
-  $(document).on('click', '.pagination a', function (event) {
-    event.preventDefault();
-    var pageNum = $(this).attr('href').split('page=')[1];
-    fetchProduct(category, search_name, price, sort, discount, pageNum);
-  });
-
-  function fetchProduct(category, search_name, price, sort, discount, page) {
-    $.ajax({
-      url: '/filter/products?' + 'category=' + category + '&price=' + price + '&name=' + search_name + '&sort=' + sort + '&discount=' + discount + '&page=' + page,
-      method: 'GET',
-      success: function success(data) {
-        $('.product_show').hide().html(data).fadeIn(1500);
-      }
-    });
-  }
-});
-
-/***/ }),
-
 /***/ "./resources/js/share_facebook.js":
 /*!****************************************!*\
   !*** ./resources/js/share_facebook.js ***!
@@ -64496,15 +64463,15 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/home.scss */"./resources/sass/home.scss");
-__webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/products.scss */"./resources/sass/products.scss");
-__webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/cart.scss */"./resources/sass/cart.scss");
-__webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/account.scss */"./resources/sass/account.scss");
-__webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/shop.scss */"./resources/sass/shop.scss");
-__webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/detail_product.scss */"./resources/sass/detail_product.scss");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/adminUser.scss */"./resources/sass/adminUser.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Laravel\php_intern_emc\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\xampp\htdocs\Laravel\php_intern_emc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Laravel\php_intern_emc\resources\sass\home.scss */"./resources/sass/home.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Laravel\php_intern_emc\resources\sass\products.scss */"./resources/sass/products.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Laravel\php_intern_emc\resources\sass\cart.scss */"./resources/sass/cart.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Laravel\php_intern_emc\resources\sass\account.scss */"./resources/sass/account.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Laravel\php_intern_emc\resources\sass\shop.scss */"./resources/sass/shop.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Laravel\php_intern_emc\resources\sass\detail_product.scss */"./resources/sass/detail_product.scss");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Laravel\php_intern_emc\resources\sass\adminUser.scss */"./resources/sass/adminUser.scss");
 
 
 /***/ })
