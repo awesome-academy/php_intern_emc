@@ -49,8 +49,8 @@
                         <h5 class="colors">{{trans('admin.product.discount')}}
                             <span>{{$product->discount}}%</span></h5>
                         <div class="border-top-grey my-3"></div>
-                        <button class="add-to-cart btn btn-default" type="button"><i aria-hidden="true"
-                                                                                     class="fa fa-cart-plus"> {{trans('admin.product.add_cart')}}</i>
+                        <button data-id="{{ $product->id }}" class="add-to-cart btn btn-default btnAddCart" type="button"><i aria-hidden="true"
+                                                                                                                             class="fa fa-cart-plus"> {{trans('admin.product.add_cart')}}</i>
                         </button>
                         <a href="#" class="btn btn-primary btn-circle btn-lg facebook_share">
                             <div class="fb-share-button"

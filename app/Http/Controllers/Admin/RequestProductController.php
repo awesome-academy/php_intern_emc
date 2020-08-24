@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\CreateRequestProduct;
 use App\Notifications\RequestProductStatus;
 use App\Repositories\Interfaces\RequestProductRepositoryInterface;
 use Illuminate\Http\Request;
@@ -64,7 +65,7 @@ class RequestProductController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(CreateRequestProduct $request)
     {
         $user_id = Auth::user()->id;
         if ($this->requestProductRepository->storeRequestProduct($user_id, $request->all())) {

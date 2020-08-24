@@ -18,7 +18,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         return $categories;
     }
 
-    public function updateCategory($id, $data)
+    public function updateCategory($id,array $data)
     {
         $result = 'Update failed';
         try {
@@ -27,7 +27,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
             $category->name = $data['name'];
             $category->parent_id = $data['parent_id'];
             $category->save();
-            
+
             $result = 'Update successfully';
         } catch (Exception $exception) {
             return $result;

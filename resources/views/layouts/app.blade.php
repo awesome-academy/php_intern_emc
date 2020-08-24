@@ -35,6 +35,8 @@
     <link href="{{ mix('css/products.css') }}" rel="stylesheet">
     <link href="{{ mix('css/cart.css') }}" rel="stylesheet">
     <link href="{{ mix('css/account.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/shop.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/detail_product.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id="app">
@@ -54,6 +56,7 @@
 <script src="{{ mix('js/orderByProducts.js') }}"></script>
 <script src="{{ mix('js/cart.js') }}"></script>
 <script src="{{ mix('js/detailOrder.js') }}"></script>
-<script src="{{mix('js/subiz_chat')}}"></script>
+<script src="{{ mix('js/subiz_chat.js')}}"></script>
+<script src="{{ mix('js/filter_product.js')}}"></script>
 </body>
 </html>

@@ -86,7 +86,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             }
 
             $product = $this->model->find($id);
-            $product = $product->update([
+            $product = $this->update($id, [
                 'name' => $data['name'],
                 'description' => $data['description'],
                 'information' => $data['information'],

@@ -1,4 +1,16 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/css/home.css": "/css/home.css",
+    "/css/products.css": "/css/products.css",
+    "/css/cart.css": "/css/cart.css",
+    "/css/account.css": "/css/account.css",
+    "/css/shop.css": "/css/shop.css",
+    "/css/detail_product.css": "/css/detail_product.css",
+    "/css/adminUser.css": "/css/adminUser.css",
+    "/js/cart.js": "/js/cart.js",
+    "/js/detailOrder.js": "/js/detailOrder.js",
+    "/js/logout.js": "/js/logout.js",
+    "/js/orderByProducts.js": "/js/orderByProducts.js",
+    "/js/scroll.js": "/js/scroll.js"
 }

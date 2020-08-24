@@ -13,6 +13,7 @@ class RequestProduct extends Model
         'user_id',
         'product_name',
         'description',
+        'image',
         'status',
     ];
 
