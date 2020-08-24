@@ -17,7 +17,8 @@ Auth::routes();
 
 Route::get('/products/viewed', 'ProductController@viewed')->name('products.viewed');
 
-Route::resource('/products', 'ProductController');
+Route::resource('products', 'ProductController');
+Route::get('products/{id}', 'ProductController@show')->name('products.show_detail');
 
 Route::resource('/cart', 'CartController')->except(['create', 'show', 'edit']);
 
@@ -50,3 +51,4 @@ Route::post('products/{id}/reviews', 'ProductController@reviewProduct')->name('p
 Route::get('comments/{id}', 'ProductController@getComments')->name('comments.index');
 Route::get('/markallnotifications', 'System\NotificationController@markAllRead')->name('noti.mark_all');
 Route::delete('/deletenotifications', 'System\NotificationController@deleteAllNotificationByUser')->name('noti.delete_all');
+Route::get('shop', 'ShopController@index')->name('shop.index');

@@ -15,6 +15,7 @@ return [
         'message' => ':message',
         'full_name' => ':full_name',
         'title_message' => 'Message Center',
+        'profile' => 'Profile'
     ],
     'sidebar' => [
         'dashboard' => 'Dashboard',
@@ -99,6 +100,10 @@ return [
                 'fail' => 'Cannot find this user',
             ],
         ],
+        'title' => 'Request Notification',
+        'content' => 'ebook that you requested',
+        'delete_all' => 'Delete all notifications',
+         'mark_all' => 'Mark all Notifications'
     ],
     'table' => [
         'product' => [
@@ -130,6 +135,10 @@ return [
         'btn_close' => 'Close',
         'title' => 'Product Management',
         'add_cart' => 'Add To Cart',
+        'requests' => 'Request Product',
+    ],
+    'requests' => [
+        'add_request_title' => 'Request Product',
     ],
     'comments' => [
         'all' => 'All Comments',
@@ -155,14 +164,14 @@ return [
     'enum' => [
         'request_status' => [
             0 => 'Pending',
-            1 => 'Success',
-            2 => 'Cancel',
+            1 => 'Accepted',
+            2 => 'Rejected',
         ],
     ],
     'status_request' => [
         'pending' => 'Pending',
-        'success' => 'Success',
-        'cancel' => 'Cancel',
+        'success' => 'Accepted',
+        'cancel' => 'Rejected',
     ],
     'order' => [
         'total_price' => 'Total',

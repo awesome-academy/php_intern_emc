@@ -10,10 +10,10 @@ $(document).ready(function() {
                 dataStatistical[item] = res[item];
             }
 
-            var ctx = document.getElementById('myChart').getContext('2d');   
+            var ctx = document.getElementById('myChart').getContext('2d');
             var chart = new Chart(ctx, {
                 type: 'line',
-            
+
                 data: {
                     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                     datasets: [{
@@ -23,7 +23,7 @@ $(document).ready(function() {
                         data: dataStatistical, // gán dữ liệu vào char
                     }]
                 },
-            
+
                 options: {
                     animation: {
                         duration: 1000,
@@ -38,7 +38,7 @@ $(document).ready(function() {
             });
         },
         error: function(err) {
-            alert('Has error');  
+
         }
     });
 });

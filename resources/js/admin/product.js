@@ -1,25 +1,25 @@
 $(document).ready(function () {
-    $('.remove-product').click(function () {
+    $("#datatable tbody").on("click", ".remove-product", function () {
         var id = $(this).val();
         deleteItem('products/', id);
     })
 
-    $('.remove-request').click(function () {
+    $("#datatable tbody").on("click", ".remove-request", function () {
         var id = $(this).val();
         deleteItem('requestproducts/', id);
     })
 
-    $('.remove-order').click(function () {
+    $("#datatable tbody").on("click", ".remove-order", function () {
         var id = $(this).val();
         deleteItem('orders/', id);
     })
 
-    $('.remove-category').click(function () {
+    $("#datatable tbody").on("click", ".remove-category", function () {
         var id = $(this).val();
         deleteItem('categories/', id);
     })
 
-    $('.remove-user').click(function () {
+    $("#datatable tbody").on("click", ".remove-user", function () {
         var id = $(this).val();
         deleteItem('users/', id);
     })
@@ -30,19 +30,19 @@ $(document).ready(function () {
         fetchProductOrders(order_id);
     })
 
-    $('.pending_btn').click(function () {
+    $("#datatable tbody").on("click", ".pending_btn", function () {
         var request_id = $(this).val();
         var status_text = $(this).parents('tr').find('td')[4].innerText;
         updateStatusRequest('requestproducts/', request_id, 0);
     })
 
-    $('.cancel_btn').click(function () {
+    $("#datatable tbody").on("click", ".cancel_btn", function () {
         var request_id = $(this).val();
         var status_text = $(this).parents('tr').find('td')[4].innerText;
         updateStatusRequest('requestproducts/', request_id, 2);
     })
 
-    $('.success_btn').click(function () {
+    $("#datatable tbody").on("click", ".success_btn", function () {
         var product_name = $(this).parents('tr').find('td')[1].innerText;
         var description = $(this).parents('tr').find('td')[2].innerText;
         var image_src = $(this).parents('tr').find('td').children('img').attr('src');
@@ -98,6 +98,67 @@ $(document).ready(function () {
                 $('#all_notifications').html('<div></div>');
             }
         });
+    })
+
+    $('.js-btn-customer-request').click(function () {
+        $('#create_request_product').modal('show');
+    })
+
+    $('.js-btn-review').click(function () {
+        $('#show_review').modal('show');
+    })
+
+    $('.js-btn-add-review').click(function () {
+        var product_id = $(this).val();
+        var content = $('#content_comment').val();
+        var rating = $("input[name='rating_comment']:checked").val();
+        var user_name = $('#navbarDropdown').text().trim();
+
+        var data;
+        if (rating === undefined) {
+            data = {
+                'content': content
+            };
+        } else {
+            data = {
+                'content': content,
+                'rating': rating,
+            }
+        }
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: product_id + '/reviews',
+            method: 'POST',
+            data: data,
+            success: function (data) {
+                var comment = '    <div class="reviews-members pt-4">\n' +
+                    '                    <div class="media">\n' +
+                    '                        <a href="#"><img alt="Generic placeholder image"\n' +
+                    '                                         src="http://bootdey.com/img/Content/avatar/avatar1.png"\n' +
+                    '                                         class="mr-3 rounded-pill"></a>\n' +
+                    '                        <div class="media-body">\n' +
+                    '                            <div class="reviews-members-header">\n' +
+                    '                                <h5 class="mb-1"><a class="text-black" href="#">' + user_name + '</a></h5>\n' +
+                    '                                <p class="text-gray">' + data.created_at + '</p>\n' +
+                    '                            </div>\n' +
+                    '                            <div class="reviews-members-body">\n' +
+                    '                                <p>' + data.content + '</p>\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+                    '                    </div>\n' +
+                    '                </div>';
+                $('.all_comments').prepend(comment);
+                $('#show_review').modal('hide');
+            },
+            error: function (data) {
+                console.log('ER', data);
+            }
+        })
     })
 });
 

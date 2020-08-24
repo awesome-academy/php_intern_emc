@@ -9,7 +9,7 @@ use DB;
 
 class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 {
-    
+
     public function getModel()
     {
         return Order::class;
@@ -54,7 +54,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
                 'total_price' => total_cart(),
                 'status' => config('enums.status.pending'),
             ]);
-    
+
             foreach (session('cart') as $key => $product) {
                 $order->productOrders()->create([
                     'product_id' => $key,
@@ -71,13 +71,13 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         }
     }
 
-    public function guestOrderProducts($data)
+    public function guestOrderProducts(array $data)
     {
         DB::beginTransaction();
 
         try {
             $order = Order::create($data);
-    
+
             foreach (session('cart') as $key => $product) {
                 $order->productOrders()->create([
                     'product_id' => $key,
@@ -99,17 +99,27 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         $data = [];
 
         $chart = DB::table('orders')
-            ->select(DB::raw('month(created_at) as month'), DB::raw('sum(total_price) as TotalAmount '))   
+            ->select(DB::raw('month(created_at) as month'), DB::raw('sum(total_price) as TotalAmount '))
             ->where(DB::raw('year(created_at)'), config('setting.year'))
             ->where('status', config('enums.status.accepted'))
             ->groupBy(DB::raw('month(created_at)'))
             ->get();
-        
+
         // lặp dữ liệu vừa query để gán vào data
         foreach ($chart as $item) {
             $data[$item->month - 1] = $item->TotalAmount;
         }
-        
+
         return $data;
+    }
+
+    public function countOrder()
+    {
+        $orderPending = $this->model->where('status', 0)->count();
+        $orderSuccess = $this->model->where('status', 1)->count();
+        return [
+            'order_pending' => $orderPending,
+            'order_success' => $orderSuccess
+        ];
     }
 }
