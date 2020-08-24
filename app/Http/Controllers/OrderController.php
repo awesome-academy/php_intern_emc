@@ -42,7 +42,6 @@ class OrderController extends Controller
         if ($result === 'Order successfully') {
             $sendMail = $this->sendMail($request->user()->email);
             session()->forget('cart');
-
             if ($sendMail === 'Send mail success') {
                 return redirect()->route('cart.index')->with('successOrder', trans('home.success_order'));
             } else {
@@ -97,9 +96,7 @@ class OrderController extends Controller
                 'products' => session('cart'),
                 'total' => total_cart(),
             ];
-
             Mail::to($email)->send(new OrderMail($content));
-
             return 'Send mail success';
         } catch(\Exception $e) {
             return 'Send mail error';

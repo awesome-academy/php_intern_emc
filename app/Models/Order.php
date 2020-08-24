@@ -27,37 +27,9 @@ class Order extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
-    public function getFullNameAttribute()
-    {
-
-        if ($this->attributes['user_id'] == null) {
-            return $this->full_name;
-        } else {
-            return $this->user->full_name;
-        }
-    }
-
-    public function getAddressAttribute()
-    {
-        if ($this->attributes['user_id'] == null) {
-            return $this->address;
-        } else {
-            return $this->user->address;
-        }
-    }
-
-    public function getPhoneNumberAttribute()
-    {
-        if ($this->attributes['user_id'] == null) {
-            return $this->phone_number;
-        } else {
-            return $this->user->phone_number;
-        }
-    }
-    
     public function productOrders()
     {
         return $this->hasMany(ProductOrder::class);

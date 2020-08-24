@@ -11,4 +11,5 @@ interface OrderRepositoryInterface
     public function guestOrderProducts(array $data);
     public function getOrdersOfUser($user_id);
     public function statistical();
+    public function countOrder();
 }

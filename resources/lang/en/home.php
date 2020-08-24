@@ -2,6 +2,7 @@
 
 return [
     'home' => 'Home',
+    'shop' => 'Shop',
     'products' => 'Products',
     'products_viewed' => 'Products Viewed',
     'new_book' => 'New book',
@@ -55,7 +56,7 @@ return [
     'bill_info' => 'Billing Information',
     'subtotal' => 'Subtotal',
     'already_account' => 'Already have an account?',
-    'order_emply_cart' => 'Cart is empty, please buy products to order', 
+    'order_emply_cart' => 'Cart is empty, please buy products to order',
     'price' => 'Price',
     'mail' => [
         'subject_mail' => 'Your order information on ',

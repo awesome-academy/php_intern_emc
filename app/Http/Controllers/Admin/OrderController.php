@@ -12,6 +12,7 @@ class OrderController extends Controller
 
     public function __construct(OrderRepositoryInterface $orderRepository)
     {
+        $this->middleware(['auth.admin', 'auth']);
         $this->orderRepository = $orderRepository;
     }
 

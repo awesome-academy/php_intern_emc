@@ -20,6 +20,7 @@ class ProductController extends Controller
      */
     public function __construct(ProductRepositoryInterface $productRepository)
     {
+        $this->middleware(['auth.admin', 'auth']);
         $this->productRepository = $productRepository;
     }
 
@@ -68,7 +69,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

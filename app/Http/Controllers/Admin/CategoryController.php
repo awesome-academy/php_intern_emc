@@ -23,6 +23,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $this->middleware(['auth.admin', 'auth']);
         $categories = $this->categoryRepository->getAll();
 
         return view('admin.categories.index', compact('categories'));
