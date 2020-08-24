@@ -9,7 +9,6 @@ require('./admin/jquery.dataTables');
 require('./admin/sb-admin-2');
 require('./admin/datatables-demo');
 require('./admin/product');
-require('./filter_product');
 require('./share_facebook');
 require('./admin/chart');
 

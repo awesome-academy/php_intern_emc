@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm menu-home">
+<nav class="navbar navbar-expand-md navbar-light bg-info shadow-sm menu-home mb-2">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
@@ -23,7 +23,7 @@
                                 <div class="col-4 category__item">
                                     <!-- Get into database -->
                                     <h2 class="category__item-title">
-                                        <a href="" >Sách giáo khoa</a> 
+                                        <a href="" >Sách giáo khoa</a>
                                     </h2>
                                     <ul class="category__item-list">
                                         <li>
@@ -44,6 +44,10 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('products.viewed') }}">{{ trans('home.products_viewed') }}</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('shop.index') }}">{{ trans('home.shop') }}</a>
                 </li>
             </ul>
 
@@ -87,6 +91,7 @@
                             </a>
                         </div>
                     </li>
+                    @include('components.notification_order')
                 @endguest
             </ul>
         </div>

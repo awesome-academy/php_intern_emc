@@ -10,11 +10,8 @@
                 <h5>{{$product->name}}</h5>
                 <span>{{number_format($product->price, 0, '', ',')}} đ</span>
             </div>
-            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
-                <button class="btn btn-primary text-uppercase"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-                <div class="add"><span class="product_fav"><i class="fa fa-heart-o"></i></span>
-                    <span
-                        class="product_fav"><i class="fa fa-opencart"></i></span></div>
+            <div class="mt-4 px-4 d-flex ">
+                <button data-id="{{ $product->id }}" class="btn btn-primary text-uppercase btnAddCart"><i class="fa fa-shopping-cart"> Order </i></button>
             </div>
         </div>
     </div>
@@ -24,4 +21,3 @@
         {{ $products->render() }}
     </div>
 </div>
-

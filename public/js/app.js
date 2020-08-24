@@ -49708,6 +49708,60 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/admin/chart.js":
+/*!*************************************!*\
+  !*** ./resources/js/admin/chart.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  var dataStatistical = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // dữ liệu ban đầu của 12 tháng
+
+  $.ajax({
+    type: 'GET',
+    url: 'admin/statistical',
+    success: function success(res) {
+      // dữ liệu trả về {5: 153000, 7: 30000}
+      // res là 1 đối tượng nên dùng for in để lặp và chèn vào dataStatistical ({5: 153000} tức là tháng 6 bán được 153000 đ)
+      for (var item in res) {
+        dataStatistical[item] = res[item];
+      }
+
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          datasets: [{
+            label: 'Revenue',
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: dataStatistical // gán dữ liệu vào char
+
+          }]
+        },
+        options: {
+          animation: {
+            duration: 1000,
+            easing: 'linear'
+          },
+          scales: {
+            yAxes: [{
+              stacked: true
+            }]
+          }
+        }
+      });
+    },
+    error: function error(err) {
+      alert('Has error');
+    }
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/js/admin/datatables-demo.js":
 /*!***********************************************!*\
   !*** ./resources/js/admin/datatables-demo.js ***!
@@ -63868,24 +63922,155 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof
 
 $(document).ready(function () {
   $('.remove-product').click(function () {
+    var id = $(this).val();
+    deleteItem('products/', id);
+  });
+  $('.remove-request').click(function () {
+    var id = $(this).val();
+    deleteItem('requestproducts/', id);
+  });
+  $('.remove-order').click(function () {
+    var id = $(this).val();
+    deleteItem('orders/', id);
+  });
+  $('.remove-category').click(function () {
+    var id = $(this).val();
+    deleteItem('categories/', id);
+  });
+  $('.remove-user').click(function () {
+    var id = $(this).val();
+    deleteItem('users/', id);
+  });
+  $('.view-order').click(function () {
+    $('#show_order').modal('show');
+    var order_id = $(this).val();
+    fetchProductOrders(order_id);
+  });
+  $('.pending_btn').click(function () {
+    var request_id = $(this).val();
+    var status_text = $(this).parents('tr').find('td')[4].innerText;
+    updateStatusRequest('requestproducts/', request_id, 0);
+  });
+  $('.cancel_btn').click(function () {
+    var request_id = $(this).val();
+    var status_text = $(this).parents('tr').find('td')[4].innerText;
+    updateStatusRequest('requestproducts/', request_id, 2);
+  });
+  $('.success_btn').click(function () {
+    var product_name = $(this).parents('tr').find('td')[1].innerText;
+    var description = $(this).parents('tr').find('td')[2].innerText;
+    var image_src = $(this).parents('tr').find('td').children('img').attr('src');
+    var image = image_src.split('/')[5];
+    var request_id = $(this).val();
+    var status_text = $(this).parents('tr').find('td')[4].innerText;
+    updateStatusRequest('requestproducts/', request_id, 1);
+    $('#add_product_request').modal('show');
+    $('#name').val(product_name);
+    $('#description').val(description);
+    $('#image').val(image);
+    $('#img_request').attr('src', image_src);
+  });
+  $(document).on('click', '.pagination_comment .pagination a', function (event) {
+    event.preventDefault();
+    var pageNum = $(this).attr('href').split('page=')[1];
+    var product_id = $('#product_id').val();
+    $.ajax({
+      url: '/comments/' + product_id + '?page=' + pageNum,
+      method: "GET",
+      success: function success(data) {
+        $('#all_comments').html(data);
+      }
+    });
+  });
+  $('.js-btn-mark-all').click(function () {
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
-    var id = $(this).val();
     $.ajax({
-      url: "products/" + id,
-      method: 'DELETE',
+      'url': '/markallnotifications',
+      'method': 'GET',
       success: function success(data) {
-        $('#item' + id).parent('td').parent('tr').remove();
-      },
-      error: function error(data) {
-        alert("Error");
+        $('.notification_count').text('0');
+      }
+    });
+  });
+  $('.js-btn-delete-noty').click(function () {
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+      'url': '/deletenotifications',
+      'method': 'DELETE',
+      success: function success(data) {
+        $('#all_notifications').html('<div></div>');
       }
     });
   });
 });
+
+function fetchProductOrders(order_id) {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+    url: 'orders/' + order_id,
+    method: 'GET',
+    success: function success(data) {
+      var product = '';
+      data.forEach(function (item) {
+        product += '<tr>\n' + '<td>' + item.name + '</td>\n' + '<td>' + item.price + '</td>\n' + '<td>\n' + '<img class="img img-thumbnail"\n' + 'src=' + window.location.origin + '/image/products/' + item.image + '>\n' + '</td>\n' + '<td>' + item.pivot.quantity + '</td>\n' + '</tr>';
+      });
+      $('.content_order').html(product);
+    },
+    error: function error(data) {
+      console.log('ER', data);
+    }
+  });
+}
+
+function deleteItem(link, id) {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+    url: link + id,
+    method: 'DELETE',
+    success: function success(data) {
+      $('#item' + id).parent('td').parent('tr').remove();
+    },
+    error: function error(data) {
+      console.log('ER', data);
+    }
+  });
+}
+
+function updateStatusRequest(link, id, status_id) {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+    url: link + id,
+    method: 'PUT',
+    data: {
+      status: status_id
+    },
+    success: function success(data) {
+      var status_change = '<span class="badge badge-pill ' + data.color + '">' + data.status + '</span>';
+      $('#item' + id).parents('tr').find('span').replaceWith(status_change);
+    },
+    error: function error(data) {}
+  });
+}
 
 /***/ }),
 
@@ -63978,6 +64163,12 @@ __webpack_require__(/*! ./admin/sb-admin-2 */ "./resources/js/admin/sb-admin-2.j
 __webpack_require__(/*! ./admin/datatables-demo */ "./resources/js/admin/datatables-demo.js");
 
 __webpack_require__(/*! ./admin/product */ "./resources/js/admin/product.js");
+
+__webpack_require__(/*! ./filter_product */ "./resources/js/filter_product.js");
+
+__webpack_require__(/*! ./share_facebook */ "./resources/js/share_facebook.js");
+
+__webpack_require__(/*! ./admin/chart */ "./resources/js/admin/chart.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
@@ -64117,6 +64308,121 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/filter_product.js":
+/*!****************************************!*\
+  !*** ./resources/js/filter_product.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  var search_name = '';
+  var price = '';
+  var category = '';
+  var sort = '';
+  var discount = '';
+  var page = 1;
+
+  var delay = function () {
+    var timer = 0;
+    return function (callback, ms) {
+      clearTimeout(timer);
+      timer = setTimeout(callback, ms);
+    };
+  }();
+
+  $('#search_txt').keyup(function () {
+    delay(function () {
+      inputText = $('#search_txt').val().toLowerCase();
+      fetchProduct(category, inputText, price, sort, discount, page);
+      search_name = inputText;
+    }, 300);
+  });
+  $('input[type=radio][name=category_radio]').change(function () {
+    var category_id = $(this).val();
+    fetchProduct(category_id, search_name, price, sort, discount, page);
+    category = category_id;
+  });
+  $('input[type=radio][name=price_filter]').change(function () {
+    var price_filter = $(this).val();
+    fetchProduct(category, search_name, price_filter, sort, discount, page);
+    price = price_filter;
+  });
+  $('#sort_price').change(function () {
+    var sort_price = $(this).val();
+    fetchProduct(category, search_name, price, sort_price, discount, page);
+    sort = sort_price;
+  });
+  $('#filter_discount').change(function () {
+    var filter_discount = $(this).val();
+
+    if (filter_discount == '') {
+      fetchProduct('', '', '', '', '', 1);
+    } else {
+      fetchProduct(category, search_name, price, sort, filter_discount, page);
+      discount = filter_discount;
+    }
+  });
+  $(document).on('click', '.pagination a', function (event) {
+    event.preventDefault();
+    var pageNum = $(this).attr('href').split('page=')[1];
+    fetchProduct(category, search_name, price, sort, discount, pageNum);
+  });
+
+  function fetchProduct(category, search_name, price, sort, discount, page) {
+    $.ajax({
+      url: '/filter/products?' + 'category=' + category + '&price=' + price + '&name=' + search_name + '&sort=' + sort + '&discount=' + discount + '&page=' + page,
+      method: 'GET',
+      success: function success(data) {
+        $('.product_show').hide().html(data).fadeIn(1500);
+      }
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/share_facebook.js":
+/*!****************************************!*\
+  !*** ./resources/js/share_facebook.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function (d, s, id) {
+  var js,
+      fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+  fjs.parentNode.insertBefore(js, fjs);
+})(document, 'script', 'facebook-jssdk');
+
+/***/ }),
+
+/***/ "./resources/sass/account.scss":
+/*!*************************************!*\
+  !*** ./resources/sass/account.scss ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/adminUser.scss":
+/*!***************************************!*\
+  !*** ./resources/sass/adminUser.scss ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -64132,6 +64438,17 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************!*\
   !*** ./resources/sass/cart.scss ***!
   \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/detail_product.scss":
+/*!********************************************!*\
+  !*** ./resources/sass/detail_product.scss ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -64161,10 +64478,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/shop.scss":
+/*!**********************************!*\
+  !*** ./resources/sass/shop.scss ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!**************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/home.scss ./resources/sass/products.scss ./resources/sass/cart.scss ***!
-  \**************************************************************************************************************************************************/
+/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/home.scss ./resources/sass/products.scss ./resources/sass/cart.scss ./resources/sass/account.scss ./resources/sass/shop.scss ./resources/sass/detail_product.scss ./resources/sass/adminUser.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -64172,7 +64500,11 @@ __webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/js/app.js */"
 __webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/app.scss */"./resources/sass/app.scss");
 __webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/home.scss */"./resources/sass/home.scss");
 __webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/products.scss */"./resources/sass/products.scss");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/cart.scss */"./resources/sass/cart.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/cart.scss */"./resources/sass/cart.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/account.scss */"./resources/sass/account.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/shop.scss */"./resources/sass/shop.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/detail_product.scss */"./resources/sass/detail_product.scss");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/php_intern_emc/resources/sass/adminUser.scss */"./resources/sass/adminUser.scss");
 
 
 /***/ })
