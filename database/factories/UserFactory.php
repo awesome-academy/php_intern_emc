@@ -22,7 +22,7 @@ $factory->define(User::class, function (Faker $faker) {
         'username' => $faker->userName,
         'full_name' => $faker->name,
         'email' => $faker->safeEmail,
-        'birthday' => $faker->dateTime,
+        'birthday' => '2000-12-26',
         'address' => $faker->address,
         'phone_number' => '0888999043',
         'gender' => random_int(0,1),
