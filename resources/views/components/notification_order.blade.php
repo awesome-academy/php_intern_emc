@@ -24,9 +24,15 @@
                     </div>
                     <div>
                         <div class="small text-gray-500">{{$notification->created_at}}</div>
-                        <span class="font-weight-bold">{{$notification->data['product_name']}} {{trans('admin.notify.content')}}
-                <span class="badge {{$notification->data['color']}}">{{$notification->data['status']}}</span>
-                </span>
+                        @if ($notification->type === 'App\Notifications\OrderStatus')
+                            <span class="font-weight-bold">{{trans('admin.notify.order_id')}} 
+                                {{$notification->data['order_id']}} {{trans('admin.notify.content_order')}}
+                        @else
+                            <span class="font-weight-bold">{{$notification->data['product_name']}} 
+                                {{trans('admin.notify.content')}}
+                        @endif
+                        <span class="badge {{$notification->data['color']}}">{{$notification->data['status']}}</span>
+                        </span>
                     </div>
                 </a>
             @endforeach

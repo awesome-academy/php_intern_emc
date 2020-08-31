@@ -102,8 +102,10 @@ return [
         ],
         'title' => 'Request Notification',
         'content' => 'ebook that you requested',
+        'order_id' => 'Order id',
+        'content_order' => 'that you bought',
         'delete_all' => 'Delete all notifications',
-         'mark_all' => 'Mark all Notifications'
+        'mark_all' => 'Mark all Notifications',
     ],
     'table' => [
         'product' => [
