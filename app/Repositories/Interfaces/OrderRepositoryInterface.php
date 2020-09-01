@@ -12,4 +12,5 @@ interface OrderRepositoryInterface
     public function getOrdersOfUser($user_id);
     public function statistical();
     public function countOrder();
+    public function sumOrderAtWeekend($friday);
 }

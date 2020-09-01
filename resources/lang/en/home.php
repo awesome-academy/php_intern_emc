@@ -67,5 +67,8 @@ return [
         'shipped_title' => 'Order Shipped',
         'address' => 'Address: ',
         'phone_number' => 'Phone Number: ',
+        'see_more' => 'See More',
+        'content_mail_order' => 'Hi Admin, Total orders in this week from Monday to Friday of your system is',
+        'subject_order' => 'Total Order From Monday To Friday : ',
     ],
 ];

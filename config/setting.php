@@ -27,4 +27,5 @@ return [
     ],
     'default_avatar' => 'http://bootdey.com/img/Content/avatar/avatar1.png',
     'year' => 2020,
+    'admin_mail' => 'admin@admin.com',
 ];
