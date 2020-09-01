@@ -63,5 +63,9 @@ return [
         'title_mail' => 'Thank you for your order, this is your order information',
         'error_mail' => 'Order successfully, but there are a few errors when sending the mail',
         'total_order' => 'The total order amount is: ',
+        'shipped' => 'Your order has been shipped!',
+        'shipped_title' => 'Order Shipped',
+        'address' => 'Address: ',
+        'phone_number' => 'Phone Number: ',
     ],
 ];

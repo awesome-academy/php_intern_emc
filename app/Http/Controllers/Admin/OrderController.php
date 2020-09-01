@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Mail\SendOrderAccepted;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendEmailAcceptOrderJob;
+use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -82,6 +86,19 @@ class OrderController extends Controller
     {
         $order = $this->orderRepository->find($id);
         if ($order->update($request->all())) {
+            if ($request->status == config('enums.status.accepted')) {
+                if ($this->sendMailAccepted($order->user, $order)) {
+                    return redirect()->route('orders.index')->with([
+                        'message' => trans('admin.notify.order.update.success'),
+                        'color' => 'success',
+                    ]);
+                } else {
+                    return redirect()->route('orders.index')->with([
+                        'message' => trans('home.mail.error_mail'),
+                        'color' => 'danger',
+                    ]);
+                }
+            }
             return redirect()->route('orders.index')->with([
                 'message' => trans('admin.notify.order.update.success'),
                 'color' => 'success',
@@ -108,5 +125,18 @@ class OrderController extends Controller
                 'color' => 'success',
             ]);
         }
+    }
+
+    public function sendMailAccepted($user, $order)
+    {
+        $result = false;
+        try {
+            SendEmailAcceptOrderJob::dispatch($user, $order);
+            $result = true;
+        } catch (Exception $exception) {
+            $result = false;
+        }
+
+        return $result;
     }
 }
