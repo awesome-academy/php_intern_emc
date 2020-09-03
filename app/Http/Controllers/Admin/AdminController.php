@@ -36,4 +36,11 @@ class AdminController extends Controller
         $statistical = $this->orderRepository->statistical();
         return $statistical;
     }
+
+    public function getCharts(Request $request)
+    {
+        $data = $request->get('getby');
+        $result = $this->orderRepository->getChart($data);
+        return $result;
+    }
 }

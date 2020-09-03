@@ -14,4 +14,5 @@ interface OrderRepositoryInterface
     public function countOrder();
     public function sumOrderAtWeekend($friday);
     public function totalOrderOneDay();
+    public function getChart($request);
 }
