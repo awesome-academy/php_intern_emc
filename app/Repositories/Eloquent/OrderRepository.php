@@ -130,4 +130,16 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         $total_order = Order::whereBetween('created_at', [$monday_date, $friday])->count();
         return $total_order;
     }
+    
+    public function totalOrderOneDay()
+    {
+        $data = DB::table('orders')
+            ->select(DB::raw('count(id) as total'))
+            ->where(DB::raw('date(created_at)'), date("Y-m-d"))
+            ->groupBy(DB::raw('date(created_at)'))
+            ->first();
+
+        $result = $data ? $data->total : 0;
+        return $result;
+    }
 }
