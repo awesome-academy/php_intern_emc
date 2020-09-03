@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\SendEmailAcceptOrderJob;
 use Exception;
 use Illuminate\Support\Facades\Mail;
+use App\Notifications\OrderStatus;
 
 class OrderController extends Controller
 {
@@ -86,6 +87,9 @@ class OrderController extends Controller
     {
         $order = $this->orderRepository->find($id);
         if ($order->update($request->all())) {
+            if ($order->user_id) { // nếu order được mua bởi 1 user thì mới tạo thông báo
+                $order->user->notify(new OrderStatus($order));
+            }
             if ($request->status == config('enums.status.accepted')) {
                 if ($this->sendMailAccepted($order->user, $order)) {
                     return redirect()->route('orders.index')->with([
