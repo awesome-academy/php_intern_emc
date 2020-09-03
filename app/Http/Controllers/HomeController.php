@@ -30,7 +30,7 @@ class HomeController extends Controller
         $saleProducts = $this->productRepository->getProductsOrderbyHome('discount', 'DESC');
         $trendProducts = $this->productRepository->getProductsOrderbyHome('view', 'DESC');
         $viewedProducts = $this->productRepository->getManyProducts([1, 2, 3, 4]); // dữ liệu test
-        
+
         return view('home', compact(['newProducts', 'saleProducts', 'trendProducts', 'viewedProducts']));
     }
 }

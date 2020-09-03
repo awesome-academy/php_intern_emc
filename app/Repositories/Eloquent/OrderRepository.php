@@ -122,4 +122,12 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
             'order_success' => $orderSuccess
         ];
     }
+
+    public function sumOrderAtWeekend($friday)
+    {
+        $monday = date_sub($friday, date_interval_create_from_date_string('4 days'));
+        $monday_date = date_format($monday, 'Y-m-d');
+        $total_order = Order::whereBetween('created_at', [$monday_date, $friday])->count();
+        return $total_order;
+    }
 }
