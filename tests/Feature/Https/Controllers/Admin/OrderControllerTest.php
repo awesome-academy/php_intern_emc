@@ -89,4 +89,28 @@ class OrderControllerTest extends TestCase
 
         $this->assertTrue(true, $result);
     }
+
+    public function test_it_gets_order_by_month()
+    {
+        $this->withoutMiddleware();
+        $request = 'month';
+        $response = $this->json('get', '/admin/charts', ['getby' => $request]);
+        $response->assertStatus(200);
+    }
+
+    public function test_it_gets_order_by_quarter()
+    {
+        $this->withoutMiddleware();
+        $request = 'quarter';
+        $response = $this->json('get', '/admin/charts', ['getby' => $request]);
+        $response->assertStatus(200);
+    }
+
+    public function test_it_gets_order_by_year()
+    {
+        $this->withoutMiddleware();
+        $request = 'year';
+        $response = $this->json('get', '/admin/charts', ['getby' => $request]);
+        $response->assertStatus(200);
+    }
 }

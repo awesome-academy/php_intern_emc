@@ -130,7 +130,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         $total_order = Order::whereBetween('created_at', [$monday_date, $friday])->count();
         return $total_order;
     }
-    
+
     public function totalOrderOneDay()
     {
         $data = DB::table('orders')
@@ -141,5 +141,29 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 
         $result = $data ? $data->total : 0;
         return $result;
+    }
+
+    public function getChart($request)
+    {
+        switch ($request) {
+            case 'year':
+                $result = DB::table('orders')->select(DB::raw('count(*) as data, year(created_at) as indexs'))
+                    ->groupBy(DB::raw('year(created_at)'))
+                    ->get();
+                return response()->json($result);
+                break;
+            case 'quarter':
+                $result = DB::table('orders')->select(DB::raw('count(*) as data, quarter(created_at) as indexs'))
+                    ->groupBy(DB::raw('quarter(created_at)'))
+                    ->get();
+                return response()->json($result);
+                break;
+            case 'month':
+                $result = DB::table('orders')->select(DB::raw('count(*) as data, month(created_at) as indexs'))
+                    ->groupBy(DB::raw('month(created_at)'))
+                    ->get();
+                return response()->json($result);
+                break;
+        }
     }
 }

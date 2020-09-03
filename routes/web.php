@@ -43,6 +43,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::resource('categories', 'CategoryController');
     Route::resource('users', 'UserController');
     Route::get('/users/order/{id}', 'UserController@order')->name('users.order');
+    Route::get('/charts', 'AdminController@getCharts');
 });
 Route::post('createproducts', 'Admin\RequestProductController@createProductFromRequest')->name('request.create_product');
 Route::get('filter/products', 'ShopController@filterProduct')->name('product.filter');

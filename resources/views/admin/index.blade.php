@@ -21,7 +21,8 @@
                             <div class="col mr-2">
                                 <div
                                     class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{trans('admin.dashboard.new_order')}}</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$orderCount['order_pending']}}</div>
+                                <div
+                                    class="h5 mb-0 font-weight-bold text-gray-800">{{$orderCount['order_pending']}}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fa fa-calendar fa-2x text-gray-300"></i>
@@ -41,7 +42,8 @@
                                     class="text-xs font-weight-bold text-info text-uppercase mb-1">{{trans('admin.dashboard.deliver')}}</div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$orderCount['order_success']}}</div>
+                                        <div
+                                            class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$orderCount['order_success']}}</div>
                                     </div>
                                     <div class="col">
                                         <div class="progress progress-sm mr-2">
@@ -79,7 +81,23 @@
             </div>
         </div>
 
-        <div class="my-3">
-            <canvas id="myChart"></canvas>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="my-3">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="float-right">
+                    <select class="js-select-chart">
+                        <option value="month">Month</option>
+                        <option value="quarter">Quarter</option>
+                        <option value="year">Year</option>
+                    </select>
+                </div>
+                <div class="my-3">
+                    <canvas id="charts"></canvas>
+                </div>
+            </div>
         </div>
 @endsection

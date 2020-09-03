@@ -10,9 +10,10 @@
     "/css/adminUser.css": "/css/adminUser.css",
     "/js/cart.js": "/js/cart.js",
     "/js/detailOrder.js": "/js/detailOrder.js",
+    "/js/filter_product.js": "/js/filter_product.js",
     "/js/logout.js": "/js/logout.js",
     "/js/orderByProducts.js": "/js/orderByProducts.js",
+    "/js/order_charts.js": "/js/order_charts.js",
     "/js/scroll.js": "/js/scroll.js",
-    "/js/filter_product.js": "/js/filter_product.js",
     "/js/subiz_chat.js": "/js/subiz_chat.js"
 }
