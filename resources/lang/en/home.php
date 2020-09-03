@@ -60,9 +60,12 @@ return [
     'price' => 'Price',
     'mail' => [
         'subject_mail' => 'Your order information on ',
+        'subject_mail_report_daily' => 'Your report order on ',
         'title_mail' => 'Thank you for your order, this is your order information',
+        'title_mail_report_daily' => 'Hello Admin, this is your report order today',
         'error_mail' => 'Order successfully, but there are a few errors when sending the mail',
         'total_order' => 'The total order amount is: ',
+        'total_order_report' => 'Total orders for today are: ',
         'shipped' => 'Your order has been shipped!',
         'shipped_title' => 'Order Shipped',
         'address' => 'Address: ',
@@ -70,5 +73,6 @@ return [
         'see_more' => 'See More',
         'content_mail_order' => 'Hi Admin, Total orders in this week from Monday to Friday of your system is',
         'subject_order' => 'Total Order From Monday To Friday : ',
+        'continue_manage' => 'Continue manage',
     ],
 ];

@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\SendEmailTotalOrderCommand'
+        'App\Console\Commands\SendEmailTotalOrderCommand',
+        'App\Console\Commands\SendDailyReportOrder',
     ];
 
     /**
@@ -24,8 +25,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-           $schedule->command('order:send_email')
-                    ->cron('0 0 * * 5'); // 0:00 thursday everyweek
+        $schedule->command('order:send_email')
+                ->cron('0 0 * * 5'); // 0:00 thursday everyweek
+        $schedule->command('dailyReport:send')
+                ->timezone(config('setting.timezone'))
+                ->dailyAt(config('setting.time_daily_report')); // daily at 22:00
     }
 
     /**
