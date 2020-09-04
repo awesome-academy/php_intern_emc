@@ -75,4 +75,6 @@ return [
         'subject_order' => 'Total Order From Monday To Friday : ',
         'continue_manage' => 'Continue manage',
     ],
+    'login_facebook' => 'Facebook',
+    'login_google' => 'Google',
 ];
