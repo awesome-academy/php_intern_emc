@@ -38,7 +38,7 @@
                         <p class="alert_nothing">{{ trans('home.empty_cart') }}</p>
                     @endif
                     
-                    <a href="{{ route('products.index') }}" class="btn__buy btn__buy-margin">{{ trans('home.continue_buy') }}</a>
+                    <a href="{{ route('shop.index') }}" class="btn__buy btn__buy-margin">{{ trans('home.continue_buy') }}</a>
                 </div>  
 
                 <div class="cart__checkout">

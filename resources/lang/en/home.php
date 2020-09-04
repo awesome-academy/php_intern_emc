@@ -58,6 +58,8 @@ return [
     'already_account' => 'Already have an account?',
     'order_emply_cart' => 'Cart is empty, please buy products to order',
     'price' => 'Price',
+    'order' => 'Order',
+    'OFF' => 'OFF',
     'mail' => [
         'subject_mail' => 'Your order information on ',
         'subject_mail_report_daily' => 'Your report order on ',

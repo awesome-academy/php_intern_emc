@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header pt-2">
     <div class="container">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">

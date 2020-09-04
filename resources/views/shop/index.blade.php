@@ -16,7 +16,7 @@
     @include('common.message')
     @include('common.errors')
     @include('products.add_request')
-    <div class="container-fluid mt-5 mb-5">
+    <div class="container-fluid mt-5 mb-5 shop">
         <div class="row g-2">
             <div class="col-md-3">
                 @guest
@@ -76,7 +76,7 @@
                     <option value="desc">{{trans('admin.filter.increase_price')}}</option>
                     <option value="asc">{{trans('admin.filter.decrease_price')}}</option>
                 </select>
-                <div class="row g-2 mt-2 product_show">
+                <div class="row g-2 mt-2 product_show" id="product_show">
                     @include('shop.product')
                 </div>
             </div>
