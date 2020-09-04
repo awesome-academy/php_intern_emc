@@ -1,4 +1,5 @@
 $second_color : #ffc120;
+$size_chat: 120px;
 
 *,
 *:after,
@@ -314,6 +315,24 @@ $second_color : #ffc120;
 
 .swal2-content {
     font-size: 18px;
+}
+
+// custom chat
+#subiz .chat-button.chat-button--right {
+    width: $size_chat !important;
+}
+
+.chat-button--img-container {
+    width: $size_chat;
+    height: $size_chat;
+}
+
+#subiz div {
+    background-size: $size_chat !important;
+}
+
+#subiz .chat-button--img {
+    width: $size_chat !important;
 }
 
 footer {

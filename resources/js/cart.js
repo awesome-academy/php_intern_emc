@@ -1,7 +1,6 @@
 $(document).ready(() => {
-    $('.btnAddCart').on('click', function() {
-        let id = $(this).attr("data-id");
-
+    function addCart(id) 
+    {
         const url = '/cart';
 
         $.ajaxSetup({
@@ -44,7 +43,18 @@ $(document).ready(() => {
                     confirmButtonText: 'Continue'
                 });
             }
-        })
+        });
+    }
+
+    $('.btnAddCart').on('click', function() {
+        let id = $(this).attr("data-id");
+        addCart(id);
+    });
+
+    // add cart on page shop and when fillter products
+    $('#product_show').on('click', '.fillterBtnAddCart', function() {
+        let id = $(this).attr("data-id");
+        addCart(id);
     });
 
     // delete cart with ajax
