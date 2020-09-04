@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories\Eloquent;
 
 use App\Repositories\Eloquent\BaseRepository;
@@ -29,5 +30,27 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         $users = $this->model->where('role', 0)->get();
 
         return $users;
+    }
+
+    public function getUserSocialNetWork($getInfo, $provider)
+    {
+        $user = User::where('provider_id', $getInfo->id)->first();
+
+        if (!$user) {
+            $user = User::create([
+                'full_name' => $getInfo->name,
+                'email' => $getInfo->email,
+                'provider' => $provider,
+                'provider_id' => $getInfo->id,
+                'username' => $getInfo->email,
+                'password' => Hash::make('123456789'),
+                'birthday' => config('setting.default_birthday'),
+                'address' => config('setting.default_address'),
+                'phone_number' => config('setting.default_phone_number'),
+                'gender' => config('setting.default_gender'),
+                'role' => 0,
+            ]);
+        }
+        return $user;
     }
 }

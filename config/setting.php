@@ -30,4 +30,8 @@ return [
     'admin_mail' => 'admin@admin.com',
     'timezone' => 'Asia/Saigon',
     'time_daily_report' => '22:00',
+    'default_phone_number' => '0888888888',
+    'default_gender' => 'gender',
+    'default_birthday' => '1998-02-02',
+    'default_address' => 'Hue',
 ];

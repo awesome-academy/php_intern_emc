@@ -53,3 +53,7 @@ Route::get('comments/{id}', 'ProductController@getComments')->name('comments.ind
 Route::get('/markallnotifications', 'System\NotificationController@markAllRead')->name('noti.mark_all');
 Route::delete('/deletenotifications', 'System\NotificationController@deleteAllNotificationByUser')->name('noti.delete_all');
 Route::get('shop', 'ShopController@index')->name('shop.index');
+
+
+Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+Route::get('/callback/{provider}', 'SocialController@callback');
